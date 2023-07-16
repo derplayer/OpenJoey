@@ -1,0 +1,307 @@
+//	chap	401	更新履歴
+
+更新履歴
+<HR>
+
+追加予定項目
+・汎用リポジトリ機構
+・文字のα情報を直接取得
+・テキストサーフェースの高速化
+・未実装になっている転送系処理
+・転送時のtransiter
+・gray scale surfaceの導入
+・Windowsの標準ダイアログのサポート
+		気が向いたら対応予定
+		・SliderControl
+		・SpinControl
+		・ProgressControl
+		・HotKey
+		・ListControl
+
+'03/07/16	version 1.40
+	・スマートポインタ、smart_ptr<T>を返していたのself_typeを返すように修正。
+	・smart_ptr::endの定義修正
+	・cleanup.batでダミーのファイル作るようにした(zipだと空のフォルダがあると
+		圧縮/解凍できないアーカイバがあるので)
+	・CMicroThreadMemoryテンプレート削除。これだめぽ。
+	・CLoadCacheをsmart_ptr<void>を用いるように変更
+	・CSoundLoader/CPlaneLoader/CSELoaderでsmart_ptr<void>を用いるように変更
+	・CLoadCacheで読み込む設定ファイルは、// 以降は無視するように修正
+	・CSoundコンストラクタ追加
+	・CStringScanner::GetNumFromCsv/GetStrFromCsvで、/はセパレータ扱いに
+		(//でのコメントを認識させるため)
+	・CSoundLoaderでストリーム再生を使用する／しないを切り替えられるように
+	・CSoundFactoryにストリーム再生フラグを指定してのCreate関数を用意
+	・CSoundLoader::GetSoundで、ファイルからの読み込みも行なうように変更
+
+'03/07/15	version 1.33
+	・GTLのBltterにdebugコード混入していたの修正
+	・CBitmap::Saveで24bppのときにアクセス違反になるの修正
+	・CMicroThreadThreadMemoryテンプレート追加
+	・smart_ptrの贅肉をばっさりそぎ落とした。
+	・smart_objとしてsmart_ptr<void>をtypedefすることにした
+	・shared_objとしてshared_ptr<void>をtypedefすることにした
+
+'03/07/14
+	・CSurfaceCacheを用意。これで描画優先順位のコントロールが簡単に可能．．
+	マップ描画にも応用できそうだが．．
+	・smart_ptrとshared_ptrをpolicy classで切り分け
+	・shared_ptr_static_cast → smart_ptr_static_castに統一
+
+'03/07/13	version 1.32
+	・smart_ptrにポリシー導入
+	・delegateいじった?
+
+'03/07/12
+	・CObjectCreater::ReleasePlugIn
+	で正しく解放できないケースがあったの修正
+	・string修正
+	→以上、plug-in-dllが正しく動かないケースがあったの修正
+	・正規表現検索/置換DLL完成。公開。
+
+'03/07/11
+	・CMicroThreadで、default allocatorを設定できるように変更
+	・CMemoryAllocatorはthread safeに
+
+	・delegate、自分自身を代入するとコンパイルエラーになったのを修正
+		set関数以外に、コンストラクタ/代入演算子での関数のセットが可能。
+		0の代入が可能。その場合clear()メソッドが呼ばれる。
+
+'03/07/10	version 1.31
+	_ismbbleadはANSI互換ではないので、
+	bool CStringScanner::IsLead_ShiftJIS(CHAR c);
+	bool CStringScanner::IsTrail_ShiftJIS(CHAR c);
+	を追加。
+	それに伴い、yaneFile.cpp、yaneStringScanner.cppではそちらを使うように修正。
+
+	あとCodeWarrior向けに色々修正。
+	see) http://www001.upp.so-net.ne.jp/keta/yaneSDK/yaneSDK.html
+
+	delegateに代入演算子を追加。
+
+	stdafx.h/stdafx.cppを一つ上の階層に移動。
+	それに伴ってプロジェクトファイルを修正。
+
+	CCPUIDでebx潰してたの修正
+
+'03/07/08
+	・function_callback::bindを構造体イメージ関係なしに
+	正常動作するように修正
+
+'03/07/07	version 1.30
+	・BCC5.5/BCB5,6でコンパイル成功。
+
+'03/07/06
+	・delegateとsmart_ptrをBCB5でコンパイル通るように
+	・function_callbackでthisだけbindしなおせるようにした
+
+'03/07/05
+	・delegate ver2.00に(炎羅)
+
+'03/07/04
+	・smart_ptr VCでしかコンパイル通らなくなっていたのを
+		gccでコンパイル通るように修正(炎羅)
+	・CThreadPooler汚かったので書き直した。
+
+'03/07/03	version 1.22a
+	・delegate一箇所コンパイル通らない部分があったのを修正。
+
+'03/07/02	version 1.22
+	・shared_ptr::getが排他されていなかったの修正
+	・function_callbackで参照引数を渡せるようになった。
+	・CFastPlaneのprimaryでlockできないときの処理まちがってたの修正
+	・異なるウィンドゥスタイルのウィンドゥを複数作れるように変更
+
+'03/06/28
+	・VisualStudio.NET 2003でコンパイル通るようにした。
+		これで、VC6,VC.NET,VC.2003でコンパイルが通ることになったヽ(´ー`)ノ
+	・炎羅さんのブランチと統合。
+	・smart_ptr<void>とshared_ptr<void>がコンパイル通るようにした。
+	これをjavaのObjectクラス相当のものとして使うことが出来る。
+	（↓のキャスト演算子とあわせて）
+
+'03/06/27
+	・smart_ptr_static_cast
+	・shared_ptr_static_cast
+
+	smart_ptr,shared_ptrにDownCast追加。また、
+
+	・smart_ptr_dynamic_cast
+	・shared_ptr_dynamic_cast
+
+	を追加
+
+'03/06/26
+	・CThreadManagerでsmart_ptr<IThread>を引数にとっていたのは
+		すべてshared_smart_ptr<IThread>に変更
+	・YTL/delegate 炎羅さんが新しいのくれた
+	・thread::synchronized クラス追加
+	・CLockObjectのwaitはthreadに対するinterruptで
+		CInterruptExceptionを投げるように変更
+	・IThread::getThread追加
+
+'03/06/24
+	・CEventやはり、CriticalSectionを入れて保護することにした
+
+'03/06/21
+	・math::roundRShiftの負数の丸め修正。
+	・ISurface::RotateBlt系で使用している丸め処理を
+		roundRShiftを用いるように変更
+	・math::roundDivに負数の時の処理追加
+
+'03/06/20
+	・YTL::string.hを使わない設定のときにもincludeしていたのを修正
+	・スレッドセーフなsmart_ptrとしてshared_ptrを用意した
+	・YTL::string.h VC++6でコンパイル通るように修正
+	・YTL::allocator.h 追加
+
+'03/06/18 ver 1.20
+	・oggvorbis最新のものに対応
+	・CSprite追加。(yaneSDK2ndの上位互換)
+	・CEvent修正。
+	・ISurface::RotateBltがバグっていたの修正。
+	・CSoundLoaderを使わないとサウンドが再生できなかったのを修正
+	・CLineParserを追加(yaneSDK2ndのもの)
+
+'03/06/17
+	・CMsgDlgクラス追加。(yaneSDK2ndのもの)
+	・CObjectCreaterは旧来のinterfaceを残したまま内部的にはLPCSTRで
+		やりとりするようにした。
+
+'03/06/16
+	・Math::に丸めつき割り算と丸めつき右シフト追加
+		(Math::roundDiv , math::roundRShift)
+	・CCPUIDにSSE/SSE2判別機能、メンバ関数、singletonオブジェクト追加
+	・従来のCObjectCreaterで作られたDLLファイルに対応するため、
+		yaneConfigでCObjectCreaterの実装を切り替えることが出来るようにした
+
+'03/06/13
+	・CSceneのシーン復帰の時の呼び出しがおかしかったの修正
+	・CSinTableに、Cos(int n,int r)とSin(int n,int r)を追加
+	・CSinTableのgrobalなインスタンスgSinTableを用意
+	・CFastDraw::Rotateでsin,cosの丸め処理追加
+	・CSinTableにAtan追加
+
+'03/06/09
+	・CFile::Write(const string&)は書式なし出力にする
+		(　'%'混じりの文字列とか出力したときにややこしいことになるので)
+	・yaneStringを新しいものに差し替え by コルン
+
+'03/05/02
+	・CKeyInputのacquireまわりちょっと改造。
+		(複数のDirectInputを持っているとなかなかacquireできないことがあるようだ
+		これは、DirectInput側の問題くさい..)
+
+'03/05/01
+	・YTL::stringを、空のstringに対してはnewは行なわない実装に変更
+	・CThreadで厳密にスレッド起動を待つようにイベント追加
+	・マルチウィンドゥ時にまれに終了しないウィンドゥがあるのを修正。
+		(CWindowのWM_DESTROYの処理の問題だったようだ)
+
+'03/04/30
+	・yaneSoundStream.hでIObjectCreaterをAuxiliary(正しくはAppFrame)に
+		宣言していたのを修正。
+	・メッセージを正しく処理するようにした結果、
+		Idleのウィンドゥ(CDebugWindow等)が終了しなくなっていたのを修正。
+	・yaneSDK3rdのクラスを用いてCObjectCreater経由でDLL化するための
+		ifdefを埋め込む
+
+'03/04/29
+	・CThread::InvalidateThreadでは、IsThreadExecuteの戻り値には影響を与え
+		ないように変更(IsThreadValidはfalseを返すようになる)
+	・yaneShell.hにCFileDialogクラス追加(かきかけ)
+	・CAppBaseのメッセージループを書き直した
+
+'03/04/28
+	YTL::string::rfind修正
+	CWinHookまわり、CWindowMessageまわり修正。
+	VC++6でコンパイルを通るように修正。（今度こそ！）
+	標準コントロール対応：
+		・ListBox
+		・Combo Box
+
+'03/04/26
+	VC++6でコンパイルが通るように修正。
+	BCB5でコンパイルが通るように修正。(まだ途中)
+
+'03/04/25
+	すべてnamespaceに閉じ込めた。
+	YTL::string::substrのバグ修正。
+
+'03/04/17
+	CMessagePooler追加。
+	CDialogHelperクラスに追加。
+		・Buttonのhook
+		・PictureControl
+		・水平／垂直バー(作りかけ)
+
+'03/04/16
+	ダイアログのコントロール関係を
+	CDialogHelperクラスに追加。
+		・ラジオボタン対応
+		・スタティックテキスト
+
+'03/04/15
+	CWindowをダイアログ対応
+	CDialogHelperクラス追加。(Window/yaneWindow.h内)
+		・チェックボタン
+		・エディットボックス
+		に対応
+
+'03/04/11
+	yaneSDK3rdをすべてnamespace yanesdk3rdに入れる
+	YTLフォルダ内のものについては、yanetemplatelibraryに入れる
+
+'03/04/10
+	CObjectCreaterのメンバの引数をstringに変更。
+	(stringクラスを自作したので)
+
+'03/04/09
+	stringクラス完成。
+
+'03/04/08
+	CDIBitmapで8bppと8bpp以外のCreateSurface時の
+	パレットエリアの確保処理が入れ替わっていたのを修正。
+
+'03/04/07
+	STLPort-4.5.3に対応完了。
+
+'03/04/05
+	std::string互換のstringクラス作成。
+	他のライブラリとの親和性のためにusing namespace std;は廃止。
+		⇒stdafx.hでusingして使う。
+
+'03/04/04
+　・CDirでテンポラリ文字列のc_strを用いていたバグ修正。
+
+'03/03/31
+　・CAppBaseで終了時にはスレッドメッセージを枯渇させてから終了するように変更。
+　・CWindowを複数作ったときの最初のクラス定義の排他処理追加。
+
+'03/03/30
+　・プロセスがまれに残存するのをfix
+　・CPlane/CPlaneLoaderに対してsurfaceのfactoryを渡す部分変更
+
+'03/03/28
+　・CFileDialog追加(in yaneShell.h)
+　・CStringScanner::Find 追加
+　・CFileをリソースファイルに対応
+　・CRegistry（レジストリ操作クラス）を追加(in yaneShell.h)
+
+'03/03/23
+　・αサーフェースからのAddColorBlt/AddColorBltFade/SubColorBlt/SubColorBltFadeをサポート
+　・CFastPlaneのサーフェースのロスト処理修正
+　・例外通知クラスでgetErrorメソッドがprotected属性になっていたのを
+	publicに変更
+　・CDIBitmap::Clear追加。Fillを呼び出していたやつ、Clearを呼び出すように変更。
+　・ISurface::RotateAlphaBlt追加。
+　・CSurfaceInfo::Rotate関連削除。(ISurfaceにあるので)
+　・CSurfaceLayer,CTextLayer,CFPSLayer追加。
+
+'03/03/22
+　・ISurface::BltNaturalでFade指定が未実装だったのを実装。
+　・ISurfaceの転送系でベースポイントの指定が未実装だったのを実装
+　・↑に伴い、ISurface::BltNaturalPos廃止。
+　・CPlaneのコンストラクタでISurfaceのポインタをとれるように変更
+　・CFastPlaneではディフォルトでCPlaneのfactoryを用いて生成するように変更
+	(もうCFastDrawのポインタを渡さなくてもよい！)
