@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.05.03"/>
+    <PROJECT value="lib\yaneSDK_d.lib"/>
+    <OBJFILES value="Debug\stdafx.obj Debug\yaneAppBase.obj Debug\yaneAppFrame.obj 
+      Debug\yaneAppInitializer.obj Debug\yaneAppManager.obj 
+      Debug\yaneFindWindow.obj Debug\yaneObjectCreater.obj 
+      Debug\yaneSingleApp.obj Debug\yaneAllocator.obj Debug\yaneCOMBase.obj 
+      Debug\yaneCPUID.obj Debug\yaneDir.obj Debug\yaneFile.obj 
+      Debug\yaneIMEWrapper.obj Debug\yaneLoadCache.obj Debug\yaneLZSS.obj 
+      Debug\yaneMemory.obj Debug\yaneSerialize.obj Debug\yaneShell.obj 
+      Debug\yaneStream.obj Debug\yaneStringMap.obj Debug\yaneStringScanner.obj 
+      Debug\yaneDIBitmap.obj Debug\yaneDirectDraw.obj Debug\yaneDirtyRect.obj 
+      Debug\yaneFastDraw.obj Debug\yaneFastPlane.obj Debug\yaneFont.obj 
+      Debug\yaneGraphicLoader.obj Debug\yaneGTL.obj Debug\yaneLayer.obj 
+      Debug\yanePlane.obj Debug\yanePlaneLoader.obj Debug\yaneScene.obj 
+      Debug\yaneSprite.obj Debug\yaneSurface1.obj Debug\yaneSurface2.obj 
+      Debug\yaneSurface3.obj Debug\yaneSurface4.obj Debug\yaneSurfaceBltter.obj 
+      Debug\yaneTextDIBitmap.obj Debug\yaneTextFastPlane.obj 
+      Debug\yaneDirectInput.obj Debug\yaneJoyStick.obj Debug\yaneKey.obj 
+      Debug\yaneKeyBase.obj Debug\yaneKeyInput.obj Debug\yaneMIDIInput.obj 
+      Debug\yaneMouse.obj Debug\yaneVirtualKey.obj Debug\yaneCounter.obj 
+      Debug\yaneRand.obj Debug\yaneSinTable.obj Debug\yaneACMStream.obj 
+      Debug\yaneAudioMixer.obj Debug\yaneCDDA.obj Debug\yaneDirectMusic.obj 
+      Debug\yaneDirectSound.obj Debug\yaneMIDIOutputDM.obj 
+      Debug\yaneMIDIOutputMCI.obj Debug\yaneSELoader.obj Debug\yaneSound.obj 
+      Debug\yaneSoundBuffer.obj Debug\yaneSoundFactory.obj 
+      Debug\yaneSoundLoader.obj Debug\yaneSoundParameter.obj 
+      Debug\yaneSoundStream.obj Debug\yaneVolumeFader.obj 
+      Debug\yaneWaveOutput.obj Debug\yaneWaveSound.obj 
+      Debug\yaneWaveStaticSound.obj Debug\yaneWaveStream.obj 
+      Debug\yaneWaveStreamSound.obj Debug\yaneCriticalSection.obj 
+      Debug\yaneEvent.obj Debug\yaneLockObject.obj Debug\yaneMicroThread.obj 
+      Debug\yaneMutex.obj Debug\yaneThread.obj Debug\yaneThreadLocal.obj 
+      Debug\yaneThreadPooler.obj Debug\yaneFPSTimer.obj 
+      Debug\yaneIntervalTimer.obj Debug\yaneTimer.obj Debug\yaneDebugWindow.obj 
+      Debug\yaneHWndManager.obj Debug\yaneWindow.obj Debug\yaneWinHook.obj 
+      Debug\function_callback.obj"/>
+    <RESFILES value=""/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value=""/>
+    <PACKAGES value=""/>
+    <PATHCPP value=".;..\..;..\..\AppFrame;..\..\Auxiliary;..\..\Draw;..\..\Input;..\..\Math;..\..\Multimedia;..\..\Thread;..\..\Timer;..\..\Window;..\..\YTL"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="TLib"/>
+    <USERDEFINES value="__MT__;_DEBUG"/>
+    <SYSDEFINES value="_NO_VCL;_ASSERTE"/>
+    <MAINSOURCE value="yaneSDK.bpf"/>
+    <INCLUDEPATH value="..\..;$(BCB)\include;..\..\AppFrame;..\..\YTL;..\..\Window;..\..\Timer;..\..\Thread;..\..\Multimedia;..\..\Math;..\..\Input;..\..\Draw;..\..\Auxiliary"/>
+    <LIBPATH value="..\..;$(BCB)\lib;$(DEBUGLIBPATH);$(BCB)\lib\psdk;..\..\YTL;..\..\Window;..\..\Timer;..\..\Thread;..\..\Multimedia;..\..\Math;..\..\Input;..\..\Draw;..\..\Auxiliary;..\..\AppFrame"/>
+    <WARNINGS value="-w-8026 -w-8027 -w-par"/>
+    <LISTFILE value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I$(BCB)\include"/>
+    <CFLAG1 value="-Od -H=$(BCB)\lib\vcl50.csm -Hh=stdafx.h -Hc -w- -Vx -Ve -X- -a8 -6 -b- -k 
+      -y -v -vi- -q -tWM -c"/>
+    <PFLAGS value="-N2Debug -N0Debug -$YD -$W -$O-"/>
+    <RFLAGS value="/l 0x411 /d &quot;_DEBUG&quot; /i$(BCB)\include"/>
+    <AFLAGS value="/mx /w2 /zi"/>
+    <LFLAGS value="/P512"/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="$(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES)"/>
+  </LINKER>
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[Debugging]
+DebugSourceDirs=
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+  </IDEOPTIONS>
+
+  <FILES>
+    <FILE type="override" value="..\..\Draw\yaneGTL.cpp" translator="Auto">
+      <CFLAG1 value=" -v -Od -vi-"/>
+    </FILE>
+  </FILES>
+</PROJECT>

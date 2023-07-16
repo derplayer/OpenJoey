@@ -1,36 +1,33 @@
+In this folder is the YTL (Yaneurao Template Library)
 
-このフォルダにあるのは、YTL(Yaneurao Template Library)
+	exception : set of exceptions
 
-	exception			:	例外の集合
+	ref_deleter : reference counted destructor (required for smart_ptr implementation)
+	ref_callback_deleter: callback destructor with reference count
 
-	ref_deleter			:	参照カウントを持った解体子(smart_ptrの実装に必要)
-	ref_callback_deleter:	参照カウントを持ったコールバック機能付き解体子
+	smart_ptr : real smart pointer.
+	Arrays and non-arrays can be fully integrated
+	Smart pointers more than smart pointers in Java
+	smart_vector_ptr : std::vector version of smart pointer
+	→ Refer to Yaneurao HP "Genius Game Programmer Training Cast Chapter 11" smart_list_ptr: std::list version of smart pointer
 
-	smart_ptr			:	real smartポインタ。
-							配列も非配列も完全に統合して扱える
-							Javaのスマートポインタ以上のスマートポインタ
-	smart_vector_ptr	:	smartポインタのstd::vectorバージョン
-		→　やねうらおＨＰ「天才ゲームプログラマ養成ギプス　第１１章」参照のこと	smart_list_ptr		:	smartポインタのstd::listバージョン
+	list_chain : custom version of std::list
 
-	list_chain			:	std::list のカスタムバージョン
+	proxy_ptr : A pointer that will be new only when needed
+	// With this, static proxy_ptr cannot be used as singleton...
 
-	proxy_ptr			:	必要に迫られたときに始めてnewするようなポインタ
-	//	これだとstaticなproxy_ptrをsingleton的に使用できない...
+	singleton : A pointer that starts new when needed
+	// use instead of proxy_ptr
 
-	singleton			:	必要に迫られたときに始めてnewするようなポインタ
-	//	proxy_ptrの代わりに使う
+	mediator : a virtual implementation of a (Java-ish) inner class
+	→ Refer to Yaneurao HP "Genius Game Programmer Training Cast Chapter 11"
+	factory_permutation : template for class permutation
+	→ Please refer to the Yaneurao HP "Genius Game Programmer Training Cast Chapter 3"
 
-	mediator			:	（Java的な）内部クラスを仮想的に実現する
-		→　やねうらおＨＰ「天才ゲームプログラマ養成ギプス　第１１章」参照のこと
-	factory_permutation	:	クラス置換のためのテンプレート
-		→　やねうらおＨＰ「天才ゲームプログラマ養成ギプス　第３章」参照のこと
+	function_callback : Callback object for functions and member functions
 
-	function_callback	:	関数，メンバ関数なんでもコールバック用オブジェクト
+	ref_creater : reference counted creator
 
-	ref_creater			:	参照カウント付き生成子
+	string : std::string compatible class
 
-	string				:	std::string互換クラス
-
-	yaneMacro			:	簡単なマクロ集
-
-
+	yaneMacro : Simple macro collection

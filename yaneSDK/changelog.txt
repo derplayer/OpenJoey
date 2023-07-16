@@ -1,0 +1,308 @@
+Change log (machine translated)
+
+Items to be added
+・General-purpose repository mechanism
+・Direct acquisition of alpha information of characters
+- Faster text surface
+・Unimplemented transfer system processing
+・Transiter at the time of transfer
+・Introduction of gray scale surface
+- Windows standard dialog support
+Will respond when I feel like it
+・Slider Control
+・Spin Control
+・Progress Control
+・HotKey
+・List Control
+
+'16/07/23 version 1.40Ex
+- Fix compilation on non-japanese MSVC6/7/7.1 (broken SJIS character escape)
+- Translate all comments into english
+
+'03/07/16 version 1.40
+- Fixed to return self_type instead of smart pointer, smart_ptr<T>.
+・Fixed definition of smart_ptr::end
+- Made a dummy file with cleanup.bat (If there is an empty folder with zip,
+(because some archivers can't compress/decompress)
+- CMicroThreadMemory template deletion. This is no good.
+・Change CLoadCache to use smart_ptr<void>
+・Changed to use smart_ptr<void> in CSoundLoader/CPlaneLoader/CSELoader
+・Fixed to ignore anything after // in the configuration file read by CLoadCache.
+・CSound constructor added
+・In CStringScanner::GetNumFromCsv/GetStrFromCsv, / is treated as a separator
+(to recognize comments in //)
+・Can switch between using/not using stream playback with CSoundLoader
+・Prepare a Create function with a stream playback flag specified in CSoundFactory
+- Changed CSoundLoader::GetSound to also read from files.
+
+'03/07/15 version 1.33
+・Fixed debug code mixed in GTL's Bltter
+・Fixed access violation at 24bpp in CBitmap::Save
+・CMicroThreadThreadMemory template added
+・The fat of smart_ptr was trimmed off.
+・I decided to typedef smart_ptr<void> as smart_obj.
+・I decided to typedef shared_ptr<void> as shared_obj.
+
+'03/07/14
+・Prepare CSurfaceCache. This makes it easy to control drawing priority. .
+It can also be applied to map drawing. .
+・Separate smart_ptr and shared_ptr by policy class
+・Unify shared_ptr_static_cast → smart_ptr_static_cast
+
+'03/07/13 version 1.32
+・Introduce policy to smart_ptr
+・Did you mess with the delegate?
+
+'03/07/12
+・CObjectCreater::ReleasePlugIn
+Fixed a case where it could not be released correctly with
+・string correction
+→Fixed cases where plug-in-dll did not work properly.
+・Regular expression search/replace DLL completed. Release.
+
+'03/07/11
+・Changed to be able to set default allocator in CMicroThread.
+・CMemoryAllocator is now thread safe
+
+・Fixed a compilation error when assigning delegate and self
+In addition to set functions, functions can be set with constructors/assignment operators.
+0 can be assigned. In that case the clear() method is called.
+
+'03/07/10 version 1.31
+_ismbblead is not ANSI compatible, so
+bool CStringScanner::IsLead_ShiftJIS(CHAR c);
+bool CStringScanner::IsTrail_ShiftJIS(CHAR c);
+	Add.
+Along with that, modified yaneFile.cpp and yaneStringScanner.cpp to use them.
+
+Various modifications for CodeWarrior.
+see) http://www001.upp.so-net.ne.jp/keta/yaneSDK/yaneSDK.html
+
+Add assignment operator to delegate.
+
+Moved stdafx.h/stdafx.cpp up one level.
+Edit the project file accordingly.
+
+Fixed ebx crashing with CCPUID
+
+'03/07/08
+・Function_callback::bind without structure image relation
+Fixed to work properly
+
+'03/07/07 version 1.30
+・Successfully compiled with BCC5.5/BCB5,6.
+
+'03/07/06
+・Make delegate and smart_ptr compile with BCB5
+- Made it possible to rebind only this with function_callback
+
+'03/07/05
+・To delegate ver2.00 (Enra)
+
+'03/07/04
+・Smart_ptr VC could only compile
+Fixed to compile with gcc (Enra)
+・CThreadPooler was dirty, so I rewrote it.
+
+'03/07/03 version 1.22a
+・Fixed that there was a part that did not pass compilation in one place of delegate.
+
+'03/07/02 version 1.22
+・Fixed that shared_ptr::get was not exclusive.
+・It is now possible to pass reference arguments in function_callback.
+・Fixed wrong processing when primary of CFastPlane cannot be locked
+・Changed so that multiple windows with different window styles can be created.
+
+'03/06/28
+- Made it possible to compile with VisualStudio.NET 2003.
+Now, VC6, VC.NET, and VC.2003 can be compiled ヽ(´ー`)ノ
+・Merged with Enra's branch.
+- Made it possible to compile smart_ptr<void> and shared_ptr<void>.
+You can use this as an equivalent of Java's Object class.
+(Together with the cast operator below)
+
+'03/06/27
+・smart_ptr_static_cast
+・shared_ptr_static_cast
+
+Add DownCast to smart_ptr, shared_ptr. again,
+
+・smart_ptr_dynamic_cast
+・shared_ptr_dynamic_cast
+
+	Add
+
+'03/06/26
+・CThreadManager took smart_ptr<IThread> as an argument
+All changed to shared_smart_ptr<IThread>
+・YTL/delegate Mr. Enra gave me a new one
+・Thread::synchronized class added
+・CLockObject's wait is an interrupt for thread
+Changed to throw CInterruptException
+・Added IThread::getThread
+
+'03/06/24
+・After all, I decided to add a CriticalSection to protect the CEvent.
+
+'03/06/21
+- Fixed negative rounding of math::roundRShift.
+・The rounding process used in the ISurface::RotateBlt system
+Changed to use roundRShift
+・Added processing for negative numbers to math::roundDiv
+
+'03/06/20
+・Fixed that it was included even when the setting did not use YTL::string.h.
+- Prepared shared_ptr as thread-safe smart_ptr
+・Fixed YTL::string.h to compile with VC++6.
+・YTL::allocator.h added
+
+'03/06/18 ver 1.20
+・Compatible with the latest oggvorbis
+・CSprite added. (upward compatible with yaneSDK2nd)
+- Fixed CEvent.
+- Fixed a bug in ISurface::RotateBlt.
+-Fixed not being able to play sounds without using CSoundLoader
+・Added CLineParser (from yaneSDK2nd)
+
+'03/06/17
+- Added CMsgDlg class. (from yaneSDK2nd)
+・CObjectCreater is internally LPCSTR while leaving the old interface
+I tried to interact.
+
+'03/06/16
+- Added division with rounding and right shift with rounding to Math::
+(Math::roundDiv, math::roundRShift)
+・Added SSE/SSE2 discrimination function, member function, and singleton object to CCPUID
+・To support DLL files created with the conventional CObjectCreater,
+Made it possible to switch the implementation of CObjectCreater with yaneConfig
+
+'03/06/13
+・Fixed the problem that the call when returning to the scene of CScene was strange.
+・Added Cos(int n,int r) and Sin(int n,int r) to CSinTable
+・Prepare a global instance gSinTable of CSinTable
+・Added rounding processing for sin and cos in CFastDraw::Rotate
+・Atan added to CSinTable
+
+'03/06/09
+・CFile::Write(const string&) outputs unformatted output
+(Because it will be confusing when outputting a character string mixed with '%')
+・Replace yaneString with a new one by Korn
+
+'03/05/02
+・A little remodeling around acquire of CKeyInput.
+(It seems that it may be difficult to acquire if you have multiple DirectInput
+This is a problem on the DirectInput side..)
+
+'03/05/01
+・Changed the implementation of YTL::string to not perform new on empty strings.
+・Add an event to strictly wait for thread startup in CThread
+-Fixed that there is a rare window that does not end when multi-window.
+(It seems that it was a problem of WM_DESTROY processing of CWindow)
+
+'03/04/30
+・Set IObjectCreater to Auxiliary (correctly AppFrame) in yaneSoundStream.h
+Fixed what was declared.
+・As a result of correct processing of messages,
+Fixed that Idle windows (CDebugWindow etc.) did not end.
+・Using the yaneSDK3rd class to create a DLL via CObjectCreater
+embed ifdef
+
+'03/04/29
+・CThread::InvalidateThread does not affect the return value of IsThreadExecute.
+Changed to not be (IsThreadValid returns false)
+・Added CFileDialog class to yaneShell.h (writing)
+・Rewrote CAppBase message loop
+
+'03/04/28
+YTL::string::rfind fix
+Fixed around CWinHook and around CWindowMessage.
+Fixed to pass compilation with VC++6. (this time!)
+Compatible with standard controls:
+・ListBox
+・Combo Box
+
+'03/04/26
+Fixed to compile with VC++6.
+Fixed to compile with BCB5. (still on the way)
+
+'03/04/25
+All confined to a namespace.
+Fixed a bug in YTL::string::substr.
+
+'03/04/17
+Added CMessagePooler.
+Added to CDialogHelper class.
+・Button hooks
+・Picture Control
+・Horizontal/vertical bar (work in progress)
+
+'03/04/16
+Dialog control relationship
+Added to CDialogHelper class.
+・Radio button support
+・Static text
+
+'03/04/15
+Dialog-enabled CWindow
+Added CDialogHelper class. (in Window/yaneWindow.h)
+・Check button
+・Edit box
+correspond to
+
+'03/04/11
+Put all yaneSDK3rd into namespace yanesdk3rd
+For those in the YTL folder, put them in the yanetemplatelibrary
+
+'03/04/10
+Change the argument of the member of CObjectCreater to string.
+(Because I made my own string class)
+
+'03/04/09
+string class completed.
+
+'03/04/08
+CDIBitmap at CreateSurface with 8bpp and non-8bpp
+Fixed that the pallet area securing process was replaced.
+
+'03/04/07
+Completed support for STLPort-4.5.3.
+
+'03/04/05
+Create a std::string compatible string class.
+Deprecated using namespace std; for compatibility with other libraries.
+⇒Using with stdafx.h.
+
+'03/04/04
+・ Fixed a bug that used the temporary string c_str in CDir.
+
+'03/03/31
+・ Changed to terminate after exhausting thread messages when ending with CAppBase.
+・ Added exclusion processing for the first class definition when creating multiple CWindows.
+
+'03/03/30
+・Fix the process remaining infrequently
+・Partial change to pass surface factory to CPlane/CPlaneLoader
+
+'03/03/28
+・Add CFileDialog (in yaneShell.h)
+・Add CStringScanner::Find
+・CFile supports resource files
+・Add CRegistry (registry manipulation class) (in yaneShell.h)
+
+'03/03/23
+・Support AddColorBlt/AddColorBltFade/SubColorBlt/SubColorBltFade from α surface
+・Correction of loss processing of CFastPlane surface
+・In the exception notification class, the getError method was a protected attribute
+change to public
+・Added CDIBitmap::Clear. Changed the one that was calling Fill to call Clear.
+・Added ISurface::RotateAlphaBlt.
+　・CSurfaceInfo::Rotate related deletion. (since it's on an ISurface)
+・ Added CSurfaceLayer, CTextLayer, and CFPSLayer.
+
+'03/03/22
+・ Implemented the Fade specification that was not implemented in ISurface::BltNatural.
+・Implemented the base point specification that was not implemented in the ISurface transfer system
+・ Due to ↑, ISurface::BltNaturalPos is abolished.
+・ Changed so that the CPlane constructor can take an ISurface pointer
+・ Changed to generate using CPlane's factory by default in CFastPlane
+(No more passing pointers to CFastDraw!)

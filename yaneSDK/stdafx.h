@@ -1,46 +1,46 @@
 #ifndef __STDAFX_H__
 #define __STDAFX_H__
 
-//	最初に設定を読み込んどこう＾＾；
+//	Let's load the settings first.
 #include "config/yaneConfig.h"
 
 
 #define WIN32_LEAN_AND_MEAN
 #define NOMINMAX
-//	windows.hのmin/maxは、std::min , std::maxと衝突する
+//	min/max in windows.h conflicts with std::min, std::max
 //	http://www.devx.com/free/tips/tipview.asp?content_id=3334
 #include <windows.h>
 
 
-// DirectSoundが使いよる。自分の使うヘッダーぐらい自分でincludeせーよ...
-#pragma warning(disable:4201)	//	mmsystem.hのなかで使用している非標準の拡張機能対策
+// DirectSound is used. Just include the headers you use yourself...
+#pragma warning(disable:4201)	//	Measures against non-standard extensions used in mmsystem.h
 #include <mmsystem.h>
 #pragma warning(default:4201)
 #pragma comment(lib,"winmm.lib")
 
-//	mpeg用の構造体があるのでプラットフォームSDKから最新のと差し替えてね！
+//	There is a structure for mpeg, so use lets use it from the platform SDK!
 #include <mmreg.h>
 
 
-// ＮＴで動作させるので、バージョンはDirectX3だ！！
+// Since it runs on NT, the version is DirectX3!
 #define DIRECTINPUT_VERSION 0x0300
 #define DIRECTDRAW_VERSION	0x0300
 #define DIRECTSOUND_VERSION 0x0300
-//	↑DirectX7からDSBUFFERDESC構造体のサイズが大きくなっているのでその対策
+//	↑Countermeasure for the increased size of the DSBUFFERDESC structure since DirectX7.
 #include <dinput.h>			// DirectInput header
 #include <ddraw.h>			// DirectDraw header
 #include <dsound.h>			// DirectSound header
-#include <dmusicc.h>		// DirectMusic header(directX6以降のSDKが必要にょ)
+#include <dmusicc.h>		// DirectMusic header(Requires DirectX6 or newer SDK)
 #include <dmusici.h>
 
-//	DirectX関係のGUIDの設定のため
-#if	defined(yaneSDK_MSVC_Mode)	//	BCCではimport32.libに含まれているため、リンクしなくてもいい
+//	For DirectX-related GUID settings
+#if	defined(yaneSDK_MSVC_Mode)	//	BCC does not need to link to it because it is included in import32.lib
 	#pragma comment(lib,"dxguid.lib")
 #endif
 
 
 //namespace yaneuraoGameSDK3rd {}
-//using namespace yaneuraoGameSDK3rd;	//	yaneSDK3rd使うんでそ？？
+//using namespace yaneuraoGameSDK3rd;	//	You're using yaneSDK3rd, right??
 namespace yaneuraoGameSDK3rd { namespace YTL {}}
 using namespace yaneuraoGameSDK3rd::YTL;
 namespace yaneuraoGameSDK3rd { namespace Thread {}}
@@ -68,34 +68,34 @@ using namespace yaneuraoGameSDK3rd::Timer;
 namespace yaneuraoGameSDK3rd { namespace Dll {}}
 using namespace yaneuraoGameSDK3rd::Dll;
 
-//	plug-in dllを作成するのならば...
+//	If you are creating a plug-in dll...
 #ifdef COMPILE_YANE_PLUGIN_DLL
-	//	YTL::stringを使うように強制しないとかち合う
+	//	Force them to use YTL::string or they will conflict.
 	#undef USE_yaneString
 	#define USE_yaneString
 #endif
 
 #if defined(USE_STL_OnVisualC) || defined(USE_STLPort)
-	//	↓STLPortの場合はincludeパスに設定しておかないといかんらしい..
+	//	↓In the case of STLPort, it seems that you have to set it in the include path..
 	#include <stdio.h>
-	// STL関連
+	// STL related
 	#include <set>
 	#include <list>
 	#include <vector>
 	#include <stack>
 	#include <map>
 	#include <algorithm>
+	
+	//	I'm sorry (;´Д`)
 	using std::set;
 	using std::list;
 	using std::vector;
 	using std::stack;
 	using std::map;
 	using std::pair;
-	//	usingをする奴は死刑？？
-	//	ご、、ごめん(;´Д`)
 
-	//	algorithmの関数どうすんねん..
-	//	一個一個指定せんといかんのか？？最悪や..
+	//	What about algorithm functions?
+	//	Do I have to specify each one individually? That sucks...
 	using std::find;
 
 #ifndef USE_yaneString
@@ -107,28 +107,28 @@ using namespace yaneuraoGameSDK3rd::Dll;
 
 
 #ifdef USE_yaneString
-	//	YTL/yaneString.hを読み込んで使う
-	#include "YTL/string.h"				//	std::string互換クラス
+	//	YTL/yaneString.h load and use
+	#include "YTL/string.h"				//	std::string compatible class
 	using namespace yaneuraoGameSDK3rd::YTL::YTLstring;
 	//	#define string YTL::string
-	//	↑この定義だと、再起的に見えるせいか、VS.NETのIntelliSenseではフリーズする
+	//	↑This definition, freezes in VS.NET IntelliSense, perhaps because it looks recursive.
 #endif
 
 
 #include <stdlib.h>		// _MAX_PATH,qsort,rand..
 
 // -------- あったら便利かな～＾＾ ----------------------------------
-//	YTLは、あったら便利？
+//	Would YTL be useful if it were available?
 
 #include "YTL/index.h"				//	Yanurao Template Library
 #include "Thread/yaneThreadLocal.h"	//	ThreadLocal template
 
-//	Err出力に必要
+//	Required for Error output
 #include "Auxiliary/yaneStream.h"
 
-// -------- 必要なものをtypedefしとくかー ---------------------------
+// -------- Let's typedef what we need ---------------------------
 
-//	定数矩形ポインタなど(MFCで定義されているがBCBへの移植を考慮して定義)
+//	Constant rectangle pointer, etc. (defined in MFC but with consideration of porting to BCB)
 typedef const RECT* LPCRECT;
 typedef const POINT* LPCPOINT;
 typedef const SIZE* LPCSIZE;

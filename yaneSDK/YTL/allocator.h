@@ -1,38 +1,38 @@
 /**
-	simple allocator class
-		STLのallocator classは、VC++6と7(.NET)で実装が異なるので
-		自前で用意する。
-		（STLPortも実装が不変とは限らないので）
+simple allocator class
+The STL allocator class has different implementations between VC++6 and 7 (.NET)
+Prepare by yourself.
+(Because the implementation of STLPort is not always immutable)
 
-	implemented by coLun(Y.Imamura) '03/06/19
+implemented by coLun(Y.Imamura) '03/06/19
 */
 /**
-	yaneSDK3rdではDLL側で実装されたクラスの呼び出しがサポートされています。
-	また、EXE-DLL間で自由に文字列を行き来するためにYTL::stringが用意されています。
-	更に、EXE-DLL間で自由にnew&deleteできるように、yaneSDKではnewとdeleteがオーバーライドされています。
+yaneSDK3rd supports calling classes implemented on the DLL side.
+In addition, YTL::string is provided for freely passing strings between EXE-DLLs.
+Furthermore, new and delete are overridden in yaneSDK so that new&delete can be freely performed between EXE-DLLs.
 
-	YTL::allocatorは、EXE-DLL間で、自由にallocate&deallocateできます。
-	yaneSDKのオーバーライドされたnew&deleteを呼び出すだけの簡単なクラスです。
+YTL::allocator can be freely allocated and deallocated between EXE-DLLs.
+It is a simple class that just calls overridden new&delete of yaneSDK.
 */
 /**
-　なお、
-	void destroy(pointer p){ p->~T(); }
-　の行は以下のプログラムのVC6でのコンパイルを確認しているので、
-　charやlongやintの場合でも問題なくコンパイルできると思われる・・・（警告もなしでした）
-> 	template<class T>
-> 	void _dest(T * t){
-> 		t->~T();
-> 	}
-> 
-> 	void main(){
-> 		char *c=new char('c');
-> 		std::cout << *c;
-> 		_dest(c);
-> 		std::cout << *c;
-> 		delete c;
-> 	}
-　もし警告やエラーを出すコンパイラがあったら、yaneSDK3rdの掲示板などへ
-　書き込みしていただけると嬉しいです・・・
+ note that,
+void destroy(pointer p){ p->~T();
+The line confirms the compilation of the following program with VC6, so
+It seems that you can compile without problems even for char, long and int... (There was no warning)
+> template<class T>
+> void _dest(T * t){
+> t->~T();
+> }
+>
+> void main(){
+> char *c=new char('c');
+> std::cout << *c;
+> _dest(c);
+> std::cout << *c;
+> delete c;
+> }
+If there is a compiler that issues warnings or errors, go to the yaneSDK3rd bulletin board, etc.
+"I would appreciate it if you could write it down..."
 */
 #ifndef __YTLAllocator_h__
 #define __YTLAllocator_h__

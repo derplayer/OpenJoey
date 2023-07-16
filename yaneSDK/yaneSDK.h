@@ -1,23 +1,29 @@
 //
 //			yaneurao GAME SDK 3rd style for Windows95/98,SE/ME/NT4.0/2000/XP
+//					v 1.40 - stable version. Compilable with VC++6/.NET/.NET2003 and BCC5.5/BCB5/6!		
 //					programmed by yaneurao(M.Isozaki)
+//					modified by derplayer
 //
-//					http://www.sun-inet.or.jp/~yaneurao/
-//					email : yaneurao@sun-inet.or.jp
+//					http://bm98.yaneu.com
+//					github : https://github.com/yaneurao
 //
 //					road to a super programmer
-//					http://www.sun-inet.or.jp/~yaneurao/rsp/
+//					http://bm98.yaneu.com/rsp/
 //
 //					Genius Great Gameprogrammers' Gypsum to a super programmer
-//					http://www.sun-inet.or.jp/~yaneurao/ggg/
+//					http://bm98.yaneu.com/intensive/ggg/
 //
 //					yaneurao GameSDK 3rd style Support
-//					http://www.sun-inet.or.jp/~yaneurao/yaneSDK/
+//					http://bm98.yaneu.com/yaneSDK3rd/chap0000.html
 //
 //					direct download site
-//					http://www.sun-inet.or.jp/~yaneurao/download/
+//					http://bm98.yaneu.com/infoseek/yaneSDK3rd/
+//
+//					derplayer homepage
+//					http://www.derplayer.neocities.org
 //
 //						reprogrammed since	Feb.20 on 2002
+//						tweaked by derplayer in july 2023
 //
 //
 
@@ -26,7 +32,7 @@
 
 //////////////////////////////////////////////////////////////////////////////
 
-//	すべて独立性の高いユニットであって不要なものはincludeしなくて良い。
+//	All headers are highly independent and unnecessary ones should not be included.
 
 #include	"AppFrame/index.h"			//	Application Frame
 #include	"Draw/index.h"				//	Drawing

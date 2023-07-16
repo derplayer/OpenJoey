@@ -1,13 +1,13 @@
 /**
- *	Delegate Template Class
- *		programmed by ENRA(S.Takebata)		'02/10/06
- *		reprogrammed by ENRA(S.Takebata)	'03/07/04	委譲アーキテクチャの変更
- *		reprogrammed by ENRA(S.Takebata)	'03/07/11	operator=などの整備
- *		reprogrammed by ENRA(S.Takebata)	'03/07/12	functorのsetに対応（互換性チェックはしない）
- *		reprogrammed by ENRA(S.Takebata)	'03/07/12	functorにoperator()があるかどうかをチェックしないように変更
- *
- *	注：スレッドセーフではありません。適宜ロックオブジェクトを利用して下さい。
- */
+  * Delegate Template Class
+  * programmed by ENRA(S.Takebata) '02/10/06
+  * reprogrammed by ENRA(S.Takebata) '03/07/04 Change delegation architecture
+  * reprogrammed by ENRA(S.Takebata) '03/07/11 operator= etc.
+  * reprogrammed by ENRA(S.Takebata) '03/07/12 Compatible with functor set (no compatibility check)
+  * reprogrammed by ENRA(S.Takebata) '03/07/12 Changed not to check if functor has operator()
+  *
+  * Note: Not thread-safe. Please use the lock object accordingly.
+  */
 
 #ifndef __YTL_DELEGATE_H__
 #define __YTL_DELEGATE_H__
@@ -20,7 +20,7 @@
 #include "delegate/is_compatible_function.hpp"
 #include "delegate/functor.hpp"
 
-//	const参照でないとオーバーロード関数の解決に失敗する(;´Д`)
+//	If it is not a const reference, the overloaded function will fail to resolve (;´Д`)
 #if defined(_MSC_VER) && (_MSC_VER<=1300) || defined(__MWERKS__) && (__MWERKS__<0x2406)
 	#define DELEGATE_TARGET_FIX(Type) const Type &
 #else
@@ -85,9 +85,9 @@ template<
 >
 struct delegate : public get_functor_type<R, args_type<A1,A2,A3,A4,A5,A6,A7,A8,A9,A10> >::type {
 /**
-	Delegateを実現するテンプレート
-	関数セット時に、このdelegateの持つoperator()がその関数を呼び出せるのか（互換性）を
-	コンパイル時にチェックする。VC++系ではエラーが出た場合、セットを行った箇所が報告される。
+	Template to realize Delegate
+	When setting a function, whether the operator () of this delegate can call that function (compatibility)
+	Check at compile time. If an error occurs in the VC++ system, the location where the setting was performed is reported.
 
 	例)
 		class CHoge {
@@ -100,9 +100,9 @@ struct delegate : public get_functor_type<R, args_type<A1,A2,A3,A4,A5,A6,A7,A8,A
 
 		//	Class Method Delegate
 		delegate<void>
-		OnTestFunc1(&hoge, &CHoge::TestFunction1);	//	VC6では関数の指定に&が必要
+		OnTestFunc1(&hoge, &CHoge::TestFunction1);	//	VC6 requires & to specify functions
 		delegate<void>
-		OnTestFunc2(&hoge, &CHoge::TestFunction2);	//	呼び出し可能ならエラーになりません
+		OnTestFunc2(&hoge, &CHoge::TestFunction2);	//	No error if callable
 		delegate<int, const char*>
 		OnTestFunc3(&hoge, &CHoge::TestFunction3);	//	const methodもset出来ます
 		OnTestFunc1();								//	CHoge::TestFunction1が呼ばれる

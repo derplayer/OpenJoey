@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-//	DirectInputのグローバル変数達・・・
+//	DirectInput global variables...
 DIOBJECTDATAFORMAT c_rgodfDIMouse[7] = {
 	{ &GUID_XAxis, 0, 0xFFFF03, 0 }, 	{ &GUID_YAxis, 4, 0xFFFF03, 0 },
 	{ &GUID_ZAxis, 8, 0x80FFFF03, 0 }, 	{ NULL, 12, 0xFFFF0C, 0 },
