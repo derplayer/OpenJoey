@@ -1,0 +1,14 @@
+//	ＹＥＳボタン
+data/yesno/01.yga
+data/yesno/03.yga
+data/yesno/02.yga
+//	ＮＯボタン
+data/yesno/05.yga
+data/yesno/06.yga
+data/yesno/04.yga
+//	「終了しますか？」
+data/yesno/end.yga
+//	「上書きしますか？」
+data/yesno/overwrite.yga
+//	「スキップしますか？」
+data/yesno/skip.yga

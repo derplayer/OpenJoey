@@ -85,7 +85,7 @@ using namespace yaneuraoGameSDK3rd::Dll;
 	#include <stack>
 	#include <map>
 	#include <algorithm>
-	
+
 	//	I'm sorry (;ÅLÑD`)
 	using std::set;
 	using std::list;

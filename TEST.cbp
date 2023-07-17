@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="TEST" />
+		<Option pch_mode="2" />
+		<Option compiler="msvctk" />
+		<Build>
+			<Target title="Debug">
+				<Option output="_bin/Debug/TEST" prefix_auto="1" extension_auto="1" />
+				<Option object_output="_obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="msvctk" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="yaneSDK" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="yaneSDK" />
+				</ResourceCompiler>
+				<Linker>
+					<Add directory="yaneSDK" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="_bin/Release/TEST" prefix_auto="1" extension_auto="1" />
+				<Option object_output="_obj/Release/" />
+				<Option type="1" />
+				<Option compiler="msvctk" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="/MT" />
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="src/capp.cpp" />
+		<Unit filename="src/capp.h" />
+		<Unit filename="src/stdafx.cpp" />
+		<Unit filename="src/stdafx.h" />
+		<Unit filename="yaneSDK/AppFrame/index.h" />
+		<Unit filename="yaneSDK/AppFrame/yaneAppBase.cpp" />
+		<Unit filename="yaneSDK/AppFrame/yaneAppDraw.h" />
+		<Unit filename="yaneSDK/AppFrame/yaneAppFrame.cpp" />
+		<Unit filename="yaneSDK/AppFrame/yaneAppFrame.h" />
+		<Unit filename="yaneSDK/AppFrame/yaneAppInitializer.cpp" />
+		<Unit filename="yaneSDK/AppFrame/yaneAppInitializer.h" />
+		<Unit filename="yaneSDK/AppFrame/yaneAppManager.cpp" />
+		<Unit filename="yaneSDK/AppFrame/yaneAppManager.h" />
+		<Unit filename="yaneSDK/AppFrame/yaneFindWindow.cpp" />
+		<Unit filename="yaneSDK/AppFrame/yaneFindWindow.h" />
+		<Unit filename="yaneSDK/AppFrame/yaneObjectCreater.cpp" />
+		<Unit filename="yaneSDK/AppFrame/yaneObjectCreater.h" />
+		<Unit filename="yaneSDK/AppFrame/yaneSingleApp.cpp" />
+		<Unit filename="yaneSDK/AppFrame/yaneSingleApp.h" />
+		<Unit filename="yaneSDK/Auxiliary/index.h" />
+		<Unit filename="yaneSDK/Auxiliary/yaneAllocator.cpp" />
+		<Unit filename="yaneSDK/Auxiliary/yaneAllocator.h" />
+		<Unit filename="yaneSDK/Auxiliary/yaneCOMBase.cpp" />
+		<Unit filename="yaneSDK/Auxiliary/yaneCOMBase.h" />
+		<Unit filename="yaneSDK/Auxiliary/yaneCPUID.cpp" />
+		<Unit filename="yaneSDK/Auxiliary/yaneCPUID.h" />
+		<Unit filename="yaneSDK/Auxiliary/yaneDir.cpp" />
+		<Unit filename="yaneSDK/Auxiliary/yaneDir.h" />
+		<Unit filename="yaneSDK/Auxiliary/yaneFile.cpp" />
+		<Unit filename="yaneSDK/Auxiliary/yaneFile.h" />
+		<Unit filename="yaneSDK/Auxiliary/yaneIMEWrapper.cpp" />
+		<Unit filename="yaneSDK/Auxiliary/yaneIMEWrapper.h" />
+		<Unit filename="yaneSDK/Auxiliary/yaneLZSS.cpp" />
+		<Unit filename="yaneSDK/Auxiliary/yaneLZSS.h" />
+		<Unit filename="yaneSDK/Auxiliary/yaneLoadCache.cpp" />
+		<Unit filename="yaneSDK/Auxiliary/yaneLoadCache.h" />
+		<Unit filename="yaneSDK/Auxiliary/yaneMemory.cpp" />
+		<Unit filename="yaneSDK/Auxiliary/yaneMemory.h" />
+		<Unit filename="yaneSDK/Auxiliary/yaneSerialize.cpp" />
+		<Unit filename="yaneSDK/Auxiliary/yaneSerialize.h" />
+		<Unit filename="yaneSDK/Auxiliary/yaneShell.cpp" />
+		<Unit filename="yaneSDK/Auxiliary/yaneShell.h" />
+		<Unit filename="yaneSDK/Auxiliary/yaneStream.cpp" />
+		<Unit filename="yaneSDK/Auxiliary/yaneStream.h" />
+		<Unit filename="yaneSDK/Auxiliary/yaneStringMap.cpp" />
+		<Unit filename="yaneSDK/Auxiliary/yaneStringMap.h" />
+		<Unit filename="yaneSDK/Auxiliary/yaneStringScanner.cpp" />
+		<Unit filename="yaneSDK/Auxiliary/yaneStringScanner.h" />
+		<Unit filename="yaneSDK/Draw/index.h" />
+		<Unit filename="yaneSDK/Draw/yaneDIBitmap.cpp" />
+		<Unit filename="yaneSDK/Draw/yaneDIBitmap.h" />
+		<Unit filename="yaneSDK/Draw/yaneDirectDraw.cpp" />
+		<Unit filename="yaneSDK/Draw/yaneDirectDraw.h" />
+		<Unit filename="yaneSDK/Draw/yaneDirtyRect.cpp" />
+		<Unit filename="yaneSDK/Draw/yaneDirtyRect.h" />
+		<Unit filename="yaneSDK/Draw/yaneFastDraw.cpp" />
+		<Unit filename="yaneSDK/Draw/yaneFastDraw.h" />
+		<Unit filename="yaneSDK/Draw/yaneFastPlane.cpp" />
+		<Unit filename="yaneSDK/Draw/yaneFastPlane.h" />
+		<Unit filename="yaneSDK/Draw/yaneFont.cpp" />
+		<Unit filename="yaneSDK/Draw/yaneFont.h" />
+		<Unit filename="yaneSDK/Draw/yaneGTL.cpp" />
+		<Unit filename="yaneSDK/Draw/yaneGTL.h" />
+		<Unit filename="yaneSDK/Draw/yaneGraphicLoader.cpp" />
+		<Unit filename="yaneSDK/Draw/yaneGraphicLoader.h" />
+		<Unit filename="yaneSDK/Draw/yaneLayer.cpp" />
+		<Unit filename="yaneSDK/Draw/yaneLayer.h" />
+		<Unit filename="yaneSDK/Draw/yanePlane.cpp" />
+		<Unit filename="yaneSDK/Draw/yanePlane.h" />
+		<Unit filename="yaneSDK/Draw/yanePlaneLoader.cpp" />
+		<Unit filename="yaneSDK/Draw/yanePlaneLoader.h" />
+		<Unit filename="yaneSDK/Draw/yaneScene.cpp" />
+		<Unit filename="yaneSDK/Draw/yaneScene.h" />
+		<Unit filename="yaneSDK/Draw/yaneSprite.cpp" />
+		<Unit filename="yaneSDK/Draw/yaneSprite.h" />
+		<Unit filename="yaneSDK/Draw/yaneSurface.h" />
+		<Unit filename="yaneSDK/Draw/yaneSurface1.cpp" />
+		<Unit filename="yaneSDK/Draw/yaneSurface2.cpp" />
+		<Unit filename="yaneSDK/Draw/yaneSurface3.cpp" />
+		<Unit filename="yaneSDK/Draw/yaneSurface4.cpp" />
+		<Unit filename="yaneSDK/Draw/yaneSurfaceBltter.cpp" />
+		<Unit filename="yaneSDK/Draw/yaneSurfaceBltter.h" />
+		<Unit filename="yaneSDK/Draw/yaneSurfaceCache.h" />
+		<Unit filename="yaneSDK/Draw/yaneTextDIBitmap.cpp" />
+		<Unit filename="yaneSDK/Draw/yaneTextDIBitmap.h" />
+		<Unit filename="yaneSDK/Draw/yaneTextFastPlane.cpp" />
+		<Unit filename="yaneSDK/Draw/yaneTextFastPlane.h" />
+		<Unit filename="yaneSDK/Input/index.h" />
+		<Unit filename="yaneSDK/Input/yaneDirectInput.cpp" />
+		<Unit filename="yaneSDK/Input/yaneDirectInput.h" />
+		<Unit filename="yaneSDK/Input/yaneJoyStick.cpp" />
+		<Unit filename="yaneSDK/Input/yaneJoyStick.h" />
+		<Unit filename="yaneSDK/Input/yaneKey.cpp" />
+		<Unit filename="yaneSDK/Input/yaneKey.h" />
+		<Unit filename="yaneSDK/Input/yaneKeyBase.cpp" />
+		<Unit filename="yaneSDK/Input/yaneKeyBase.h" />
+		<Unit filename="yaneSDK/Input/yaneKeyInput.cpp" />
+		<Unit filename="yaneSDK/Input/yaneKeyInput.h" />
+		<Unit filename="yaneSDK/Input/yaneMIDIInput.cpp" />
+		<Unit filename="yaneSDK/Input/yaneMIDIInput.h" />
+		<Unit filename="yaneSDK/Input/yaneMouse.cpp" />
+		<Unit filename="yaneSDK/Input/yaneMouse.h" />
+		<Unit filename="yaneSDK/Input/yaneVirtualKey.cpp" />
+		<Unit filename="yaneSDK/Input/yaneVirtualKey.h" />
+		<Unit filename="yaneSDK/Math/index.h" />
+		<Unit filename="yaneSDK/Math/yaneCounter.cpp" />
+		<Unit filename="yaneSDK/Math/yaneCounter.h" />
+		<Unit filename="yaneSDK/Math/yaneRand.cpp" />
+		<Unit filename="yaneSDK/Math/yaneRand.h" />
+		<Unit filename="yaneSDK/Math/yaneRound.h" />
+		<Unit filename="yaneSDK/Math/yaneSinTable.cpp" />
+		<Unit filename="yaneSDK/Math/yaneSinTable.h" />
+		<Unit filename="yaneSDK/Multimedia/index.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneACMStream.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneACMStream.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneAudioMixer.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneAudioMixer.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneCDDA.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneCDDA.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneDirectMusic.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneDirectMusic.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneDirectSound.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneDirectSound.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneMIDIOutputDM.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneMIDIOutputDM.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneMIDIOutputMCI.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneMIDIOutputMCI.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneSELoader.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneSELoader.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneSound.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneSound.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneSoundBuffer.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneSoundBuffer.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneSoundFactory.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneSoundFactory.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneSoundLoader.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneSoundLoader.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneSoundParameter.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneSoundParameter.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneSoundStream.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneSoundStream.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneVolumeFader.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneVolumeFader.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneWaveOutput.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneWaveOutput.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneWaveSound.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneWaveSound.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneWaveStaticSound.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneWaveStaticSound.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneWaveStream.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneWaveStream.h" />
+		<Unit filename="yaneSDK/Multimedia/yaneWaveStreamSound.cpp" />
+		<Unit filename="yaneSDK/Multimedia/yaneWaveStreamSound.h" />
+		<Unit filename="yaneSDK/Thread/index.h" />
+		<Unit filename="yaneSDK/Thread/yaneCriticalSection.cpp" />
+		<Unit filename="yaneSDK/Thread/yaneCriticalSection.h" />
+		<Unit filename="yaneSDK/Thread/yaneEvent.cpp" />
+		<Unit filename="yaneSDK/Thread/yaneEvent.h" />
+		<Unit filename="yaneSDK/Thread/yaneLockObject.cpp" />
+		<Unit filename="yaneSDK/Thread/yaneLockObject.h" />
+		<Unit filename="yaneSDK/Thread/yaneMicroThread.cpp" />
+		<Unit filename="yaneSDK/Thread/yaneMicroThread.h" />
+		<Unit filename="yaneSDK/Thread/yaneMutex.cpp" />
+		<Unit filename="yaneSDK/Thread/yaneMutex.h" />
+		<Unit filename="yaneSDK/Thread/yaneThread.cpp" />
+		<Unit filename="yaneSDK/Thread/yaneThread.h" />
+		<Unit filename="yaneSDK/Thread/yaneThreadLocal.cpp" />
+		<Unit filename="yaneSDK/Thread/yaneThreadLocal.h" />
+		<Unit filename="yaneSDK/Thread/yaneThreadPooler.cpp" />
+		<Unit filename="yaneSDK/Thread/yaneThreadPooler.h" />
+		<Unit filename="yaneSDK/Timer/index.h" />
+		<Unit filename="yaneSDK/Timer/yaneFPSTimer.cpp" />
+		<Unit filename="yaneSDK/Timer/yaneFPSTimer.h" />
+		<Unit filename="yaneSDK/Timer/yaneIntervalTimer.cpp" />
+		<Unit filename="yaneSDK/Timer/yaneIntervalTimer.h" />
+		<Unit filename="yaneSDK/Timer/yaneTimer.cpp" />
+		<Unit filename="yaneSDK/Timer/yaneTimer.h" />
+		<Unit filename="yaneSDK/Window/index.h" />
+		<Unit filename="yaneSDK/Window/yaneDebugWindow.cpp" />
+		<Unit filename="yaneSDK/Window/yaneDebugWindow.h" />
+		<Unit filename="yaneSDK/Window/yaneHWndManager.cpp" />
+		<Unit filename="yaneSDK/Window/yaneHWndManager.h" />
+		<Unit filename="yaneSDK/Window/yaneWinHook.cpp" />
+		<Unit filename="yaneSDK/Window/yaneWinHook.h" />
+		<Unit filename="yaneSDK/Window/yaneWindow.cpp" />
+		<Unit filename="yaneSDK/Window/yaneWindow.h" />
+		<Unit filename="yaneSDK/YTL/allocator.h" />
+		<Unit filename="yaneSDK/YTL/delegate.h" />
+		<Unit filename="yaneSDK/YTL/delegate/functor.hpp" />
+		<Unit filename="yaneSDK/YTL/delegate/is_compatible_function.hpp" />
+		<Unit filename="yaneSDK/YTL/delegate/is_convertible.hpp" />
+		<Unit filename="yaneSDK/YTL/delegate/is_same.hpp" />
+		<Unit filename="yaneSDK/YTL/delegate/select_type.hpp" />
+		<Unit filename="yaneSDK/YTL/delegate/type_test.hpp" />
+		<Unit filename="yaneSDK/YTL/delegate/yes_no_type.hpp" />
+		<Unit filename="yaneSDK/YTL/exceptions.h" />
+		<Unit filename="yaneSDK/YTL/factory_permutation.h" />
+		<Unit filename="yaneSDK/YTL/fast_list.h" />
+		<Unit filename="yaneSDK/YTL/function_callback.cpp" />
+		<Unit filename="yaneSDK/YTL/function_callback.h" />
+		<Unit filename="yaneSDK/YTL/index.h" />
+		<Unit filename="yaneSDK/YTL/list_chain.h" />
+		<Unit filename="yaneSDK/YTL/macro.h" />
+		<Unit filename="yaneSDK/YTL/mediator.h" />
+		<Unit filename="yaneSDK/YTL/proxy_ptr.h" />
+		<Unit filename="yaneSDK/YTL/ref_callback_deleter.h" />
+		<Unit filename="yaneSDK/YTL/ref_creater.h" />
+		<Unit filename="yaneSDK/YTL/ref_deleter.h" />
+		<Unit filename="yaneSDK/YTL/singleton.h" />
+		<Unit filename="yaneSDK/YTL/smart_list_ptr.h" />
+		<Unit filename="yaneSDK/YTL/smart_ptr.h" />
+		<Unit filename="yaneSDK/YTL/smart_vector_ptr.h" />
+		<Unit filename="yaneSDK/YTL/string.h" />
+		<Unit filename="yaneSDK/config/yaneConfig.h" />
+		<Unit filename="yaneSDK/stdafx.cpp" />
+		<Unit filename="yaneSDK/stdafx.h" />
+		<Unit filename="yaneSDK/yaneSDK.h" />
+		<Extensions>
+			<compiler project_loader_arguments="">
+				<compiler_settings target="Debug" target_loader_arguments="" />
+				<compiler_settings target="Release" target_loader_arguments="" />
+			</compiler>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

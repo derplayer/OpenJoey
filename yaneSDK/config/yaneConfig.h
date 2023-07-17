@@ -11,6 +11,11 @@
 //	Compile confirmed with VC6.0(sp5)/VC7.0/VC7.1
 	#define yaneSDK_MSVC_Mode
 
+	// Newer Platform SDK want those
+	#define WINVER 0x0400
+    #define _WIN32_WINNT 0x0400
+	#define _WIN32_WINNT_NT4 0x0400
+
 	// The debugger can't handle symbols more than 255 characters long.
 	// STL often creates symbols longer than that.
 	// When symbols are longer than 255 characters, the warning is disabled.
@@ -27,6 +32,24 @@
 	// -------- Annoying waring measures that will appear in VC7 --------------------
 	//	Disable waring in function throw declarations (VC7)
 	#pragma warning(disable:4290)
+
+	// MSVC 2003 Toolkit warnings
+	#pragma warning(disable:4820)
+	#pragma warning(disable:4668) // GEEEZ
+	#pragma warning(disable:4512)
+	#pragma warning(disable:4619)
+	#pragma warning(disable:4625)
+	#pragma warning(disable:4626)
+	#pragma warning(disable:4511)
+	#pragma warning(disable:4530)
+	#pragma warning(disable:4265)
+	#pragma warning(disable:4266)
+	#pragma warning(disable:4917)
+	#pragma warning(disable:4217)
+	#pragma warning(disable:4191)
+	#pragma warning(disable:4610)
+	#pragma warning(disable:4242)
+	#pragma warning(disable:4061)
 
 #elif defined(__BORLANDC__) && (__BORLANDC__>=0x551)
 //	Compile confirmed with BCB5(up1)/BCC5.5.1
@@ -45,7 +68,7 @@
 	//	InlineAssembler can be used, but the grammar seems to be different
 	#define yaneSDK_CantUseInlineAssembler
 
-#else 
+#else
 //	What a weird compiler ÅR(`ÑDÅL)Ém
 	#error Sorry, yaneSDK3rd cannot be compiled by this compiler.
 
@@ -73,7 +96,7 @@
 */
 
 //#define NOT_USE_DEFAULT_DLLMAIN
-// Å™If you have defined this symbol, when creating YANE_PLUGIN_DLL,
+// If you have defined this symbol, when creating YANE_PLUGIN_DLL,
 // DllMain written by user. (Refer to DllMain in yaneObjectCreater.h
 // Please write it down)
 
@@ -93,11 +116,11 @@
 //#define USE_MEMORY_CHECK		//	Do you want to leave a log record for each new and delete?
 //#define USE_MEMORY_STATE		//	Use the memory debug class (CMemoryState)
 								//	(This class also acts as a fast new/delete)
-								//	Å™ This class is under construction. don't use it! !
+								//	This class is under construction. don't use it! !
 
 #define USE_EXCEPTION			//	use exception handling
 
-// Å™ If the above option uses exceptions,
+// If the above option uses exceptions,
 #ifdef _DEBUG
 // #define USE_STOP_EXCEPTION
 	// Defined in YTL/exceptions.h
@@ -117,7 +140,7 @@
 //	#define USE_Direct3D		//	Should I use CDirect3DPlane/CDirect3DDraw?
 
 #define USE_FastDraw		//	Should CFastPlane/CFastDraw be used?
-#define USE_DIB32			//	Å©This is temporarily used for the implementation of FastPlane
+#define USE_DIB32			//	This is temporarily used for the implementation of FastPlane
 							//	Will be removed in a later version
 #define USE_YGA				//	do you use YGA? (image format)
 

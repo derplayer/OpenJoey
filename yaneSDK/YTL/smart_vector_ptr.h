@@ -42,13 +42,15 @@ public:
 		smart_ptr<T> t(new T);
 		base_type::push_back(t);
 	}
+
 	template <class S>
 	base_type::iterator	insert(const base_type::iterator& it, S* ptr){
-		//	所有権を持ったsmart_ptrを生成し、
-		//	smart_ptr間のコピーで、所有権が移動する
+        // create a smart_ptr with ownership,
+        // Copying between smart_ptr transfers ownership
 		smart_ptr<T> t(ptr);
 		return base_type::insert(it, t);
 	}
+
 	template <class S>
 	base_type::iterator	insert(const base_type::iterator& it, const smart_ptr<S>& s){
 		smart_ptr<T> t;

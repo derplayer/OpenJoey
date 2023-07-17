@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "../Thread/yaneThread.h"
 #include "../AppFrame/yaneAppBase.h"
-#include <process.h> 
+#include <process.h>
 
 namespace yaneuraoGameSDK3rd {
 namespace Thread {
@@ -112,7 +112,7 @@ LRESULT CThread::CreateThread() {
    をコールする。
 2. すると、_threadstart がコールされる。
 3. _threadstart内でコールバック関数がコールされる。
-4. 上記コールバック関数終了後、直ちに 
+4. 上記コールバック関数終了後、直ちに
 		_endthread がコール
 　　される。
 
@@ -142,7 +142,7 @@ LRESULT CThread::StopThread() {
 
 	//	強制的に、このスレッドを削除するコードは危険なので投入しない
 
-	DWORD dwResult = 0;	
+	DWORD dwResult = 0;
 	HANDLE dwThreadHandle = m_dwThreadHandle;
 	m_dwThreadHandle = (HANDLE)0;
 	m_dwRunningThreadID = (DWORD)-1;
@@ -203,7 +203,7 @@ LRESULT CThread::JumpToThread() {
 //void CThread::ThreadCallBack(LPVOID lpVoid){
 unsigned __stdcall CThread::ThreadCallBack( void * lpVoid){
 	//	↑_beginthreadexを用いるので変更しました
-	
+
 	CThread* pThread = reinterpret_cast<CThread*>(lpVoid);
 
 	pThread->m_dwRunningThreadID = ::GetCurrentThreadId();
