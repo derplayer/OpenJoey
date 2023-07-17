@@ -1,0 +1,28 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "call", "call.vcproj", "{7A38DD79-5368-4BA1-83B4-58B961C98A5E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "yaneSDK", "..\..\..\yaneSDK3rd\yaneSDK.vcproj", "{ADE7FA7E-4B8C-40E0-924E-D4D2140E8975}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+		{7A38DD79-5368-4BA1-83B4-58B961C98A5E}.0 = {ADE7FA7E-4B8C-40E0-924E-D4D2140E8975}
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{7A38DD79-5368-4BA1-83B4-58B961C98A5E}.Debug.ActiveCfg = Debug|Win32
+		{7A38DD79-5368-4BA1-83B4-58B961C98A5E}.Debug.Build.0 = Debug|Win32
+		{7A38DD79-5368-4BA1-83B4-58B961C98A5E}.Release.ActiveCfg = Release|Win32
+		{7A38DD79-5368-4BA1-83B4-58B961C98A5E}.Release.Build.0 = Release|Win32
+		{ADE7FA7E-4B8C-40E0-924E-D4D2140E8975}.Debug.ActiveCfg = Debug|Win32
+		{ADE7FA7E-4B8C-40E0-924E-D4D2140E8975}.Debug.Build.0 = Debug|Win32
+		{ADE7FA7E-4B8C-40E0-924E-D4D2140E8975}.Release.ActiveCfg = Release|Win32
+		{ADE7FA7E-4B8C-40E0-924E-D4D2140E8975}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

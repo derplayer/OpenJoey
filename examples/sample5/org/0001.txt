@@ -1,0 +1,365 @@
+
+//	chap	0
+
+<B>C++ maniax</B>
+
+C++って、奥が深い。どんな乱暴でも出来ちゃう。あまり奥深くやっても仕方ないのかも知れないけど、人なみ以上のことは知っておきたい。そんなあなたのために、こんなコーナー作っちゃいました！
+
+参考書⇒『The Annotated C++ Reference Manual』：ARMと略す
+参考ML⇒cppll
+
+<A href="chap0001.html">§1.一時オブジェクトの寿命</A>
+<A href="chap0002.html">§2.無名namespace</A>
+<A href="chap0003.html">§3.namespaceの落とし穴</A>(かきかけ)
+
+<B>参考資料関係リンク</B>
+
+<A href="http://www005.upp.so-net.ne.jp/episteme/html/stlprog/">Standard Template Library プログラミング on the Web</A>
+επιστημη氏のSTL本。絶版になったのでWebで公開されています。
+ありがたやありがたやありがたや（－人－）
+
+
+//	chap	1
+
+一時オブジェクトの寿命
+
+<HR>
+
+１．リファレンス一時オブジェクトの寿命
+
+・リファレンスに対する初期設定子の一部として使われた場合、そのリファレンスと同じだけ生存する。(ARM12.2)
+
+別の言い方をするとconst参照は一時オブジェクトを束縛する。
+
+//	box	1	cppll3724
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+string createString()
+{
+  return "Safe";
+}
+
+int main()
+{
+  const string& x = createString();
+  cout << "x = " << x << "\n";
+
+  return 0;
+}
+//	ebox
+
+だから、このリファレンスの生存期間が問題になる場合もある。
+
+//	box	1	cppll2448
+class A{
+  int  n_;
+public:
+  A( int x = 5 ) : n_(x) {}
+};
+
+class REF{
+  A&  a_;
+public:
+  REF( A& x = A() ): a_(x) {}  // ここの一時オブジェクトA()
+};
+
+void main(){
+  REF  r1, r2(A(10));
+}
+//	ebox
+
+Aのコンストラクタを抜けた時点でxがスコープからはずれるので一時オブジェクトA()は破棄されている。よって上記のコードは安全ではない。
+
+ちなみに
+
+//	box	1
+	const string& temp = str1 + str2;
+//	ebox
+
+を
+
+//	box	1
+	const string temp = str1 + str2;
+//	ebox
+
+と書いてもほとんど同じコードが生成される。これはオブジェクトを返す関数の最適化の一種で、名前付返却値の最適化と呼ばれる。よって参照で一時オブジェクトを格納する必要性は、あまりない。
+
+参考：
+http://www.fides.dti.ne.jp/~oka-t/cpplab-retval-ctor.html
+
+//	box	1
+	int& i = int(1);		//	error
+	const int& i = int(1);	//	ok
+//	ebox
+
+前者は、非constリファレンスなので一時オブジェクト1を束縛できない。
+
+同じ理由で
+
+//	box	1
+	void	f(int& x);	//	constをつけていない
+	に対してf(1);
+//	ebox
+という呼び出しはエラーになる。
+
+//	box	1
+	void	f(const int& x);
+//	ebox
+
+ならばok。
+
+２．リファレンスに束縛されていない一時オブジェクトの寿命
+
+リファレンスに束縛されていない一時オブジェクトの寿命は、それが作成された完全式の終わりまで継続する。(ARM12.2)
+
+完全式というのがわかりにくいが、セミコロン（；）までと思えば良い。
+
+よって、
+//	box	1
+	string temp = str1 + str2;
+//	ebox
+
+は、セーフ。一時オブジェクトを関数に渡すのも関数から抜けるまで一時オブジェクトが生存していることが保証される
+
+//	box	1
+	f( string("safe") );
+	f( string("safe").c_str() );
+	f( (string("A") + "B").c_str() );
+	class C;に対して f(&C());
+	//	C()は一時オブジェクトCを作り、そのコンストラクタ呼び出す構文。
+//	ebox
+
+いずれも安全である。（C++仕様上は）
+
+・参考
+
+以下のコードをvc6およびg++でコンパイル＆ビルドして動かした。
+
+//	box	1
+#include <iostream>
+#include <string>
+#include <vector>
+
+class C{
+public:
+	static C CC(){return C();}
+	C(){std::cout << "C()" << std::endl;}
+	~C(){std::cout << "~C()" << std::endl;}
+	C CCC(){return C();}
+	int a() const {std::cout << "a()" << std::endl;return 1;}
+};
+int f(int i){
+	std::cout << i << std::endl;
+	return i;
+}
+void main(){
+	f(f(f(C::CC().CCC().CCC().a())));
+}
+//	ebox
+
+//	box	2	結果
+ C()
+ C()
+ C()
+ a()
+ 1
+ 1
+ 1
+ ~C()
+ ~C()
+ ~C()
+//	ebox
+
+と、どちらの環境でも同じ結果が出た。どうやら仕様通りにきちんと実装されているようだ。
+
+//	chap	2
+
+無名namespace
+
+<HR>
+
+グローバルに宣言された、
+
+//	box	1
+	static int i;
+//	ebox
+
+は、内部リンケージがある。C++規格ではこのような大域staticは将来的になくなる。(ARM §3.3.1.5)
+
+よって、これらは代わりに無名のnamespaceに閉じ込めてやる必要がある。
+
+namespaceについて知っておくべきことは、以下のこと。
+
+・namespaceは型ではない。
+・namespaceはアクセス制御できない。（すべてpublic扱い)
+・namespaceはオープンである。つまり、１つの名前空間が１つの翻訳単位(＝ソースファイル単位）でテキストとして連続している必要がなく、複数の翻訳単位にまたがることもできる。
+・namespaceは、グローバルスコープか、別の名前空間内で宣言しなければならない。クラスや関数内部では宣言できない。
+
+//	box	1
+namespace n
+   {
+   int a;
+   } // このあと`;`は不要
+
+namespace n // 同じ名前のnamespaceをつづけて書くことも可能
+   {
+   int b;
+   }
+
+int i = n::a; // aはnamespace nに存在して、かつpublic扱い
+
+n x; // namesapceのnは型ではないのでエラー
+
+class c
+   {
+   namespace n // クラス内でnamespaceの宣言は不可なのでエラー
+	  {
+	  }
+   };
+//	ebox
+
+・using-directive(指令)とusing-declarationの(宣言)違い(ARM §3.3.1.2)
+
+C++標準ライブラリはほとんどがnamespace std内に閉じ込められている。名前にいちいちstd::をつけるのはたいへん面倒なので、
+
+//	box	1
+	using namespace std;
+//	ebox
+として、名前をスコープの範囲内に置くことができる。特定の名前だけを選択したいときは、
+//	box	1
+	using std::string;
+//	ebox
+のようにする。
+
+前者はusing-directiveと呼ばれる。後者は、using-declarationと呼ばれる。
+
+using-directiveは名前空間名による限定なしでアクセスを可能にする。
+ 一方、using-declaration は、それを宣言したスコープに名前を追加する。
+
+よって、以下のようになる。
+
+//	box	1
+  namespace N {
+	int x,y;
+  }
+
+  void func() {
+	float x;
+	using N::x;			 // エラー (x の2重宣言)
+	using namespace N;
+	x = 1.0;			 // ローカルの x にアクセス
+	N::x = 1;			 // N::x にアクセス
+	y = 2;				 // N::y にアクセス
+  }	 
+//	ebox
+
+・namespaceのメンバをヘッダで宣言して実装ファイルで定義する
+
+//	box	1	 doodle.h
+namespace doodle
+   {
+   void f();
+   }
+//	ebox
+
+// box	1	doodle.cpp
+#include "doodle.h"
+void doodle::f()
+   {
+   // ...
+   }
+//	ebox
+
+・無名namespace
+
+namespaceで空間の名前を指定しなかった場合、翻訳単位内にある無名の名前空間すべてについて同じ“隠し名”を使用される。各翻訳単位において他と重複しない隠し名がそれぞれ割り当てられる。すなわち、
+
+//	box	1
+namespace {
+   void f() {}
+}
+//	ebox
+無名namespaceで閉じ込められたfは、外部リンケージを持つにもかかわらず、その名前空間が翻訳単位で異なる隠し名であるために外部からアクセスされることは決してない。すなわち、内部リンケージを持つかのごとく使うことが出来る。
+
+・無名namespace≠内部リンケージ
+
+//	box	1
+void f() {}
+static void f(int){}
+static void g()
+   {
+   f(0); // OK, calls `f(int)`
+   f();	 // OK, calls `f()`
+   }
+//	ebox
+
+これを無名namespaceで囲って以下のように変形した場合、
+
+//	box	1
+void f(){}
+namespace{ void f(int){}}
+namespace{
+   void g(){
+	  f(0); // `f(int)`を呼び出せる
+	  f();	// これは`f(int)`を呼び出そうとしてエラーになる
+	  }
+   }
+//	ebox
+
+後者はエラーになる。これは、無名namespaceによって名前fを隠匿させられたためで、後者は以下のように書く必要がある。
+
+//	box	1
+	   ::f();  // これなら`f()`を呼び出せる
+//	ebox
+
+
+参考：
+Deep C++ :
+http://www.microsoft.com/japan/msdn/library/ja/jpdndeepc/htm/deep04062000.asp
+
+C++ Labyrinth :
+http://www.fides.dti.ne.jp/~oka-t/cpplab-tips-1.html
+
+//	chap 3	namespaceの落とし穴
+
+namespaceの落とし穴
+
+<HR>
+
+・namespace内のdefine
+
+namespaceでdefineを括った場合、そのdefineはその名前空間内で宣言されたものとは扱われない。
+
+//	box	1
+namespace ZZZ {
+#define XXX 5
+}
+
+int	x = XXX; // アクセスできちゃうよーん
+//	ebox
+
+何故こんなダサい仕様になっているのかわからないが、defineはプリプロセッサでの処理で、そのプリプロセッサにあまり負担をかけたくなかったのだろう。
+
+・名前の重複
+
+他の人が同じ名前空間名を使用しないとも限らない。
+ある程度長い名前をつけて、それをaliasして使うほうが良いだろう。
+
+//	box	1
+namespace XXXYYYZZZ {
+	namespace AAABBBCCC {
+		const int xyz = 1;
+	}
+}
+
+namespace myspace = XXXYYYZZZ::AAABBBCCC;
+
+void f(){
+	int x = myspace::xyz;
+}
+//	ebox
+

@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.05.03"/>
+    <PROJECT value="..\..\sample2_d.exe"/>
+    <OBJFILES value="Debug\capp.obj Debug\stdafx.obj"/>
+    <RESFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value="..\..\..\..\yaneSDK\ProjectFiles\BCB5.0\lib\yaneSDK_d.lib"/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value=""/>
+    <PACKAGES value=""/>
+    <PATHCPP value=".;..\..\source"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="tlink32"/>
+    <USERDEFINES value="__MT__;_DEBUG"/>
+    <SYSDEFINES value="_NO_VCL"/>
+    <MAINSOURCE value="sample2.bpf"/>
+    <INCLUDEPATH value="$(BCB)\include;..\..\..\..\yaneSDK;..\..\source"/>
+    <LIBPATH value="$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\lib\psdk;..\..\..\..\yaneSDK\ProjectFiles\BCB5\lib;..\..\source"/>
+    <WARNINGS value="-w-par"/>
+  </MACROS>
+  <OPTIONS>
+    <CFLAG1 value="-vGc -vGt -vGd -Od -H=$(BCB)\lib\vcl50.csm -Hh=stdafx.h -Hc -w- -Vx -Ve 
+      -X- -a8 -6 -b- -k -y -v -vi- -tW -tWM -c"/>
+    <PFLAGS value="-N2Debug -N0Debug -$Y+ -$W -$O- -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zi"/>
+    <LFLAGS value="-IDebug -D&quot;&quot; -aa -Tpe -x -Gn -v"/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="cg32.lib $(LIBFILES) $(LIBRARIES) import32.lib cw32mt.lib"/>
+  </LINKER>
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1041
+CodePage=932
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=3
+Item0=$(BCB)\include;..\..\..\..\yaneSDK;..\..\source
+Item1=$(BCB)\include;..\..\..\..\yaneSDK\;..\..\source
+Item2=..\..\source;..;$(BCB)\include;..\..\..\..\yaneSDK\
+
+[HistoryLists\hlLibraryPath]
+Count=3
+Item0=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\lib\psdk;..\..\..\..\yaneSDK\ProjectFiles\BCB5\lib;..\..\source
+Item1=$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\lib\psdk;..\..\..\..\yaneSDK\ProjectFiles\BCB5\lib\;..\..\source
+Item2=..\..\source;..;$(BCB)\lib\obj;$(BCB)\lib;$(BCB)\lib\psdk;..\..\..\..\yaneSDK\ProjectFiles\BCB5\lib\
+
+[HistoryLists\hlConditionals]
+Count=2
+Item0=__MT__;_DEBUG
+Item1=__MT__
+
+[HistoryLists\hlIntOutputDir]
+Count=1
+Item0=Debug
+
+[HistoryLists\hlFinalOutputDir]
+Count=1
+Item0=..\..\
+
+[Debugging]
+DebugSourceDirs=
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=1
+LinkCGLIB=1
+  </IDEOPTIONS>
+</PROJECT>

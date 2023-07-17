@@ -1,0 +1,9 @@
+USEUNIT("..\..\source\capp.cpp");
+USE("..\..\source\capp.h", File);
+USEUNIT("..\..\source\stdafx.cpp");
+USE("..\..\source\stdafx.h", File);
+USELIB("..\..\..\..\yaneSDK\ProjectFiles\BCB5.0\lib\yaneSDK_d.lib");
+//---------------------------------------------------------------------------
+This file is used by the project manager only and should be treated like the project file
+
+WinMain
