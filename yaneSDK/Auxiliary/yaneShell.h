@@ -39,7 +39,9 @@ public:
 
 }}
 
+#ifndef yaneSDK_GCC_Mode_NOWIN
 #include <Shlobj.h>
+#endif // yaneSDK_GCC_Mode_NOWIN
 
 namespace yaneuraoGameSDK3rd {
 namespace Auxiliary {
@@ -51,8 +53,8 @@ class CFolderDialog {
 		↓MSDNに、apartment threadingでCoInitializeしなはれと
 		書いてあるんだが、どうしたもんか．．
 	Remarks:
-	SHBrowseForFolder. You can also use CoInitialize or OLEInitialize, 
-	which always use apartment threading.		
+	SHBrowseForFolder. You can also use CoInitialize or OLEInitialize,
+	which always use apartment threading.
 */
 public:
 	LRESULT GetOpenFolderName(string& strFolderName, const string& DefaultFolder=""
@@ -82,7 +84,9 @@ public:
 }}
 //////////////////////////////////////////////////////////////////////////////
 
+#ifndef yaneSDK_GCC_Mode_NOWIN
 #include <winreg.h>
+#endif // yaneSDK_GCC_Mode_NOWIN
 
 namespace yaneuraoGameSDK3rd {
 namespace Auxiliary {

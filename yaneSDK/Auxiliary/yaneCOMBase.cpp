@@ -1,5 +1,7 @@
 #include "stdafx.h"
+#ifndef yaneSDK_GCC_Mode_NOWIN
 #include <objbase.h>
+#endif // yaneSDK_GCC_Mode_NOWIN
 #include "yaneCOMBase.h"
 #include "yaneStream.h"
 

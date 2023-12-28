@@ -5,7 +5,9 @@
 #ifndef __yaneFindWindow_h__
 #define __yaneFindWindow_h__
 
+#ifndef yaneSDK_GCC_Mode_NOWIN
 #include <tlhelp32.h>
+#endif // yaneSDK_GCC_Mode_NOWIN
 
 namespace yaneuraoGameSDK3rd {
 namespace AppFrame {

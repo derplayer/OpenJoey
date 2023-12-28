@@ -5,10 +5,12 @@
 #ifndef __yaneIMEWrapper_h__
 #define __yaneIMEWrapper_h__
 
+#ifndef yaneSDK_GCC_Mode_NOWIN
 
 #include <imm.h>	// for ImmAssociateContext
-
 #pragma comment(lib,"imm32.lib")
+
+#endif // yaneSDK_GCC_Mode_NOWIN
 
 namespace yaneuraoGameSDK3rd {
 namespace Auxiliary {

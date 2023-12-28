@@ -7,6 +7,7 @@
 
 #ifdef USE_EXCEPTION
 
+
 namespace yaneuraoGameSDK3rd {
 namespace YTL {
 
@@ -91,7 +92,7 @@ public:
 class CSyntaxException : public CException {
 ///		一般的な文法エラーに対するアクセス例外
 public:
-	CSyntaxException(const string& strErrorName) : m_str(strErrorName) {}	
+	CSyntaxException(const string& strErrorName) : m_str(strErrorName) {}
 	virtual string getError() const {
 		return m_str;
 	}

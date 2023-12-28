@@ -18,11 +18,13 @@ inline void Swap(T& x,T& y){
 	y = t;
 };
 
+#ifndef yaneSDK_GCC_Mode_NOWIN
 ///	ゼロで埋めるマクロ
 template<class T>
 inline void ZERO(T& var){
 	::ZeroMemory(&var,sizeof(var));
 }
+#endif // yaneSDK_GCC_Mode_NOWIN
 
 /// ポインタが非NULLならばReleaseを掛けるマクロ。
 template<class T>

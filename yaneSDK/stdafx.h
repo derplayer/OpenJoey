@@ -5,12 +5,13 @@
 #include "config/yaneConfig.h"
 
 
+#ifndef yaneSDK_GCC_Mode_NOWIN
+
 #define WIN32_LEAN_AND_MEAN
 #define NOMINMAX
 //	min/max in windows.h conflicts with std::min, std::max
 //	http://www.devx.com/free/tips/tipview.asp?content_id=3334
 #include <windows.h>
-
 
 // DirectSound is used. Just include the headers you use yourself...
 #pragma warning(disable:4201)	//	Measures against non-standard extensions used in mmsystem.h
@@ -38,6 +39,10 @@
 	#pragma comment(lib,"dxguid.lib")
 #endif
 
+#else
+// GCC Mode
+// TODO heh
+#endif // yaneSDK_GCC_Mode_NOWIN
 
 //namespace yaneuraoGameSDK3rd {}
 //using namespace yaneuraoGameSDK3rd;	//	You're using yaneSDK3rd, right??
@@ -85,9 +90,10 @@ using namespace yaneuraoGameSDK3rd::Dll;
 	#include <stack>
 	#include <map>
 	#include <algorithm>
+    #include <memory>
 
-	//	I'm sorry (;ÅLÑD`)
 	using std::set;
+	//	I'm sorry (;ÅLÑD`)
 	using std::list;
 	using std::vector;
 	using std::stack;
@@ -99,8 +105,10 @@ using namespace yaneuraoGameSDK3rd::Dll;
 	using std::find;
 
 #ifndef USE_yaneString
-	#include <string>
-	using std::string;
+    //#include <cstring> // for memcpy()
+    #include <string> // for string class
+
+    using std::string;
 #endif
 
 #endif // defined(USE_STL_OnVisualC) || defined(USE_STLPort)

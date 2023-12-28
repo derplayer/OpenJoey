@@ -68,6 +68,20 @@
 	//	InlineAssembler can be used, but the grammar seems to be different
 	#define yaneSDK_CantUseInlineAssembler
 
+#elif defined(__GNUC__)
+    /*
+    #if defined(__i386__)
+        #define yaneSDK_GCC_Mode // experimental
+    #else
+        #define yaneSDK_GCC_Mode_NOWIN
+    #endif
+    */
+    #define yaneSDK_GCC_Mode_NOWIN
+    #define USE_STLPort // force it
+
+	//	Just to be sure, should work?
+	#define yaneSDK_CantUseInlineAssembler
+
 #else
 //	What a weird compiler ÅR(`ÑDÅL)Ém
 	#error Sorry, yaneSDK3rd cannot be compiled by this compiler.
@@ -118,7 +132,7 @@
 								//	(This class also acts as a fast new/delete)
 								//	This class is under construction. don't use it! !
 
-#define USE_EXCEPTION			//	use exception handling
+// #define USE_EXCEPTION			//	use exception handling
 
 // If the above option uses exceptions,
 #ifdef _DEBUG
@@ -169,10 +183,10 @@
 // --- STL	--------------------------------------------------------------
 //	Choose the type of STL to use
 
-#define USE_STL_OnVisualC
+//#define USE_STL_OnVisualC
 //	Using Visual C++'s STL
 
-//#define USE_STLPort
+#define USE_STLPort
 /**
 	If you use STLPort, comment out USE_STL_OnVisualC above!
 

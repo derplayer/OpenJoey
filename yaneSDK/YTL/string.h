@@ -15,6 +15,7 @@
 	'03/05/13　→　rfindの不具合を解消(文字列を引数に取るrfind)
 	'03/05/19　→　iteratorとconst_iteratorの定義の見直し（boost対応）
 	'03/06/20　→　reverse_iteratorとconst_reverse_iteratorの見直し（VC6対応）
+	'23/07/17　→　defines to not use this class on gcc
 
 	UNICODEでもうまく動くといいなぁ．．ヽ(´Д｀)ノ
 
@@ -26,6 +27,8 @@
 
 #ifndef __YTLString_h__
 #define __YTLString_h__
+
+#ifdef USE_yaneString
 
 #include "../YTL/allocator.h"
 //#include "../YTL/exceptions.h"
@@ -421,7 +424,7 @@ public:
 	}
 
 //#!標準STLのstd::stringとの変換
-	///	std::basic_string<E,T,A>型のオブジェクトsが保持する文字列を内容として初期化します 
+	///	std::basic_string<E,T,A>型のオブジェクトsが保持する文字列を内容として初期化します
 	self_type& operator= (const std::basic_string<E,T,A>& s) {
 		assign(s.begin(), s.end());
 		return *this;
@@ -864,7 +867,7 @@ public:
 			while ( _it != _last ) {
 				for ( size_type i=0; i<len; ++i ) {
 					if ( traits_type::eq(*_it, s[i]) ) { return (_it - _first); }
-				}		
+				}
 				++_it;
 			}
 		}
@@ -1654,3 +1657,5 @@ typedef basic_string<char> string;
 //	こんなしょーもないクラス作るのに丸一日かかったよヽ(`Д´)ノｳﾜｧｧｧｧｧﾝ
 
 #endif
+
+#endif // __YTLString_h__

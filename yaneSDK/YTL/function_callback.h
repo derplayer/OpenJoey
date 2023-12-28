@@ -10,6 +10,8 @@
 #ifndef __YTLFunctionCallback_h__
 #define __YTLFunctionCallback_h__
 
+#ifndef yaneSDK_GCC_Mode_NOWIN
+
 namespace yaneuraoGameSDK3rd {
 namespace YTL {
 
@@ -256,7 +258,7 @@ protected:
 ////////////////////////////////////////////////////////
 //	あとは、上記の、
 //		リザルトの有無×引数の数(0-5)×メンバ関数or非メンバ関数
-//	のバリエーション　＝　２４個　(;´Д`) 
+//	のバリエーション　＝　２４個　(;´Д`)
 
 //---------	リザルト無し	グローバル関数
 class function_callback_vg0 : public function_callback_v {
@@ -649,3 +651,5 @@ protected:
 } // end of namespace yaneuraoGameSDK3rd
 
 #endif
+
+#endif // __YTLFunctionCallback_h__
