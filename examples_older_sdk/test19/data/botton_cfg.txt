@@ -1,8 +1,0 @@
-//	ボタンを押されてないとき
-//　と、押されたときの画像ファイル名
-data/exit1.yga
-data/exit2.yga
-data/bgm1.yga
-data/bgm2.yga
-data/bgm3.yga
-data/bgm4.yga

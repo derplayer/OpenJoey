@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "capp.h"
 
-void	CApp::MainThread() {
+void CApp::MainThread() {
 	GetDraw()->SetDisplay();
 
 	CKey1 key;
@@ -12,16 +12,16 @@ void	CApp::MainThread() {
 	SetMainApp(true);
 
 	CPlane bgplane;
-	bgplane->Load("_temp\AA076_640480.jpg");
+	bgplane->Load("AA076_640480.jpg");
 
 	CPlane charaplane;
-	charaplane->Load("_temp\理緒菜640_480.yga");
+	charaplane->Load("理緒菜640_480.yga");
 
 	CRootCounter nFade(0, 255, 8);
 	CRootCounter nPhase(0, 6, 1);
 
 	CTextFastPlane* pText = new CTextFastPlane;
-	pText->GetFont()->SetText("スペースキーを押すと次のフェーズに");
+	pText->GetFont()->SetText("Press Space to move to next scene!");
 	pText->GetFont()->SetSize(30);
 	pText->UpdateTextAA();
 	CPlane text(pText);

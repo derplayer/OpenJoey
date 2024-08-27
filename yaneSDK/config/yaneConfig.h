@@ -132,11 +132,11 @@
 								//	(This class also acts as a fast new/delete)
 								//	This class is under construction. don't use it! !
 
-// #define USE_EXCEPTION			//	use exception handling
+#define USE_EXCEPTION			//	use exception handling
 
 // If the above option uses exceptions,
 #ifdef _DEBUG
-// #define USE_STOP_EXCEPTION
+#define USE_STOP_EXCEPTION
 	// Defined in YTL/exceptions.h
 	// show a dialog when an exception occurs
 	// Measures to stop on memory errors (only when debugging)

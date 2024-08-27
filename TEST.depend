@@ -8,7 +8,7 @@
 	"yaneAppManager.h"
 	"yaneAppInitializer.h"
 
-1689557315 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\stdafx.h
+1703878642 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\stdafx.h
 	"config/yaneConfig.h"
 	<windows.h>
 	<mmsystem.h>
@@ -25,6 +25,7 @@
 	<stack>
 	<map>
 	<algorithm>
+	<memory>
 	<string>
 	"YTL/string.h"
 	<stdlib.h>
@@ -32,9 +33,9 @@
 	"Thread/yaneThreadLocal.h"
 	"Auxiliary/yaneStream.h"
 
-1689560152 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\config\yaneconfig.h
+1703879312 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\config\yaneconfig.h
 
-1058034368 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\ytl\string.h
+1689606760 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\ytl\string.h
 	"../YTL/allocator.h"
 	<stdexcept>
 	<string>
@@ -62,9 +63,9 @@
 	"../YTL/delegate.h"
 	"../YTL/fast_list.h"
 
-1050951866 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\ytl\macro.h
+1689610685 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\ytl\macro.h
 
-1055559820 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\ytl\exceptions.h
+1689610510 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\ytl\exceptions.h
 
 1058260708 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\ytl\ref_deleter.h
 
@@ -72,7 +73,7 @@
 	"function_callback.h"
 	"smart_ptr.h"
 
-1058033554 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\ytl\function_callback.h
+1689611059 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\ytl\function_callback.h
 
 1058308954 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\ytl\smart_ptr.h
 	"../Thread/yaneCriticalSection.h"
@@ -202,7 +203,7 @@
 	"yaneFindWindow.h"
 	"../Auxiliary/yaneFile.h"
 
-1057884516 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\appframe\yanefindwindow.h
+1689607220 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\appframe\yanefindwindow.h
 	<tlhelp32.h>
 
 1057884562 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\auxiliary\yanefile.h
@@ -227,7 +228,7 @@
 
 1057884568 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\thread\yanemutex.h
 
-1057884562 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\auxiliary\yaneshell.h
+1689607464 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\auxiliary\yaneshell.h
 	<Shlobj.h>
 	<winreg.h>
 
@@ -238,7 +239,7 @@
 1057934774 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\auxiliary\yaneallocator.h
 	"../Thread/yaneLockObject.h"
 
-1051904530 source:h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\auxiliary\yanecombase.cpp
+1689607485 source:h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\auxiliary\yanecombase.cpp
 	"stdafx.h"
 	<objbase.h>
 	"yaneCOMBase.h"
@@ -276,7 +277,7 @@
 	"../Window/yaneHWndManager.h"
 	"winnls32.h"
 
-1057884562 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\auxiliary\yaneimewrapper.h
+1689607326 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\auxiliary\yaneimewrapper.h
 	<imm.h>
 
 1057884568 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\window\yanehwndmanager.h
@@ -294,7 +295,7 @@
 	"stdafx.h"
 	"yaneLZSS.h"
 
-1050697818 source:h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\auxiliary\yanememory.cpp
+1703879256 source:h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\auxiliary\yanememory.cpp
 	"stdafx.h"
 	"yaneMemory.h"
 
@@ -346,7 +347,7 @@
 
 1058133826 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\draw\yanesurface.h
 
-1056715104 source:h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\draw\yanedirectdraw.cpp
+1703878927 source:h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\yanesdk\draw\yanedirectdraw.cpp
 	"stdafx.h"
 	"yaneDirectDraw.h"
 
@@ -910,7 +911,7 @@
 	"../AppFrame/yaneAppBase.h"
 	<process.h>
 
-1689604185 source:h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\src\capp.cpp
+1724768874 source:h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\src\capp.cpp
 	"stdafx.h"
 	"capp.h"
 
@@ -1032,4 +1033,11 @@
 
 1057970880 source:h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\src\stdafx.cpp
 	"stdafx.h"
+
+1703878789 source:h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\src\system\effects\ceffect.cpp
+	"stdafx.h"
+	"CEffect.h"
+
+1703878504 h:\development\projects\visual studio\yugioh_poc_patcher\openjoey\_repo\src\system\effects\ceffect.h
+	"../../../yaneSDK/yaneSDK.h"
 

@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "yaneMemory.h"
 
+namespace yaneuraoGameSDK3rd {
+namespace Auxiliary {
+
 //	new,deleteごとにログ記録を残すか？
 #ifdef	USE_MEMORY_CHECK
 
@@ -36,9 +39,6 @@
 	メモリが解放されていなかったかがわかる。
 
 */
-
-namespace yaneuraoGameSDK3rd {
-namespace Auxiliary {
 
 void* operator new (size_t t){
 	void *p = ::malloc(t);
@@ -207,7 +207,7 @@ void	CMemoryState::BeginSnap(int nBlockSize,int nBlockNum) {
 	m_lpanEmptyBlock = new int[nBlockNum];
 	for(int i=0;i<nBlockNum;i++){ m_lpanEmptyBlock[i] = i; }
 	GetCallBack()->clear();
-	g_lpMemoryState = this; 
+	g_lpMemoryState = this;
 }
 ///	スナップを開始する
 
@@ -221,7 +221,8 @@ void	CMemoryState::EndSnap() {
 }
 ///	スナップを終了する
 
+#endif
+
 } // end of namespace Auxiliary
 } // end of namespace yaneuraoGameSDK3rd
 
-#endif

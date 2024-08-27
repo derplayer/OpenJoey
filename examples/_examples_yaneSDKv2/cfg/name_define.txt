@@ -1,0 +1,39 @@
+//	ネームプレートはここに番号順に登録する
+//	0番から順番に登録していく
+//	例）grp/name/00.yga
+//		↑grp/nameフォルダのなかの00.ygaというファイルを意味します
+grp/name/00.yga
+grp/name/01.yga
+grp/name/02.yga
+grp/name/03.yga
+grp/name/04.yga
+grp/name/05.yga
+grp/name/06.yga
+grp/name/07.yga
+grp/name/08.yga
+grp/name/09.yga
+grp/name/10.yga
+grp/name/11.yga
+grp/name/12.yga
+grp/name/13.yga
+grp/name/14.yga
+grp/name/15.yga
+grp/name/16.yga
+grp/name/17.yga
+grp/name/18.yga
+grp/name/19.yga
+grp/name/20.yga
+grp/name/21.yga
+grp/name/22.yga
+grp/name/23.yga
+grp/name/24.yga
+grp/name/25.yga
+grp/name/26.yga
+grp/name/27.yga
+grp/name/28.yga
+grp/name/29.yga
+grp/name/30.yga
+grp/name/31.yga
+grp/name/32.yga
+grp/name/33.yga
+grp/name/34.yga
