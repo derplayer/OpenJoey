@@ -9,7 +9,8 @@ TL;DR: Imagine early 2000s free C++ Unity engine for japanese indie devs.
 The "TEST" project file is for Code::Blocks. You will also need:
 * Microsoft Visual C++ Toolkit 2003 (the SDKv3 has also support for VC++6/.NET/.NET2003 and BCC5.5/BCB5/6!, look in yaneSDK\ProjectFiles folder)
 * Microsoft Platform SDK (older one that plays nice with Visual C++ Toolkit 2003)
-* Microsoft® DirectX® 8.0 SDK
+* Microsoft® DirectX® 8.0 SDK 
+
 The sdk can also be compiled in lib mode.
 
 ## Untouched yaneSDK source code
@@ -29,5 +30,8 @@ There is also a very cool [gamedev programming book series](https://www.amazon.c
 The original yaneSDK was released as public domain by Motohiro Isozaki aka [yaneurao](https://github.com/yaneurao).
 This repo is more like an mirror with tweaks. You can also download the original source code on his website if you want.
 [Official YaneSDK Homepage](https://bm98.yaneu.com/yaneSDK.html)
+
+## Discord/Contact
+[Yu-Gi-Oh! Power of Chaos/Online modding discord](https://discord.com/invite/GAKKaJYwF7)
 
 ![Alt text](/misc/scr.jpg?raw=true "Skeleton screenshot")
