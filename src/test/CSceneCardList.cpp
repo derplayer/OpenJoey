@@ -101,16 +101,9 @@ void CSceneCardList::OnMove(const smart_ptr<ISurface>& lp) {
     key.Input();
     m_mouse.Flush();
 
-    // NEW: Increment scene frame counter
+    // Increment scene frame counter
     m_currentSceneFrameCount++; // This is crucial for the new animation timing
-
     if (m_timerMain.Get() < 500) return;
-
-    // DEBUG ONLY: Increase font size (for scrolling debug)
-    if (key.IsKeyPush(5)) { // Space key
-		m_cardTextBox->GetFont()->SetHeight(50); 
-		m_cardTextBox->GetFont()->SetSize(30);
-    }
 
     // Update buttons
     if (m_backButton) {
@@ -131,7 +124,7 @@ void CSceneCardList::OnMove(const smart_ptr<ISurface>& lp) {
             m_sceneAnimState = SAS_EXITING_GRID; // Start exit animation
 			m_nPreviewCard = NULL;
             m_nPreviewCardId = 0; // Clear preview on page change
-            m_fullCardPreviewPlane = smart_ptr<CFastPlane>(); // FIX: Clear full card preview
+            m_fullCardPreviewPlane = smart_ptr<CFastPlane>(); // Clear full card preview
         }
     }
 
@@ -253,19 +246,79 @@ void CSceneCardList::OnDraw(const smart_ptr<ISurface>& lp) {
 
 		// Draw the card textbox footer
 		if (m_cardTextBoxFooter.get()) {
-			m_cardTextBoxFooter->OnSimpleDraw(lp.get());
+
+			if(m_nPreviewCardId != 0)
+			{
+				MonsterType ctype = m_nPreviewCard->properties.GetMonsterType();
+				if (ctype == TYPE_SPELLCARD || ctype == TYPE_TRAPCARD)
+				{
+					// INFO: dont draw footer for spell and trap cards
+				}
+				else 
+				{
+					// Draw pap line and overlay
+					// TODO: cache this data in memory, geez
+					POINT papPos = m_vDetailPlaneLoader.GetXY(3); // Only X axis is defined
+					int textBoxX, textBoxY;
+					m_cardTextBox->GetSize(textBoxX, textBoxY);
+					int textBoxPosX, textBoxPosY;
+					m_cardTextBox->GetXY(textBoxPosX, textBoxPosY);
+					int arrowX, arrowY;
+					m_cardTextBox->GetArrowSize(arrowX, arrowY);
+					int papYAxis = (textBoxY+textBoxPosY) - arrowY;
+
+					lp->BltFast(m_papLine.get(), papPos.x, papYAxis); // blit pap separator
+
+					// Get pap length
+					int papLX, papLY;
+					m_papLine->GetSize(papLX, papLY);
+
+					// Prepare background reblit to hide text behind it
+					int startX = papPos.x;
+					int startY = papYAxis + 1; // 1 is the line thinckness
+					int sliceW = papLX; // Only pap x-axis size needed
+					int sliceH = papPos.x;
+
+					// RECT is { left, top, right, bottom }
+					RECT sourceRect = {
+						startX, 
+						startY, 
+						startX + sliceW, 
+						startY + sliceH 
+					};
+
+					// Blit the snippet to the exact same screen position to "restore" the background
+					lp->BltFast(
+						m_bgPlane, 
+						startX, 
+						startY, 
+						NULL, 
+						&sourceRect, 
+						NULL, 
+						0
+					);
+
+					m_cardTextBoxFooter->OnSimpleDraw(lp.get());
+				}
+			}
+
+
 		}
-    }
+	}
 
     m_nFade.Inc();
 }
 
 void CSceneCardList::InitializeUI() {
-    // Load background
+    // Load background asset
     CPlane bgPlane = m_vDetailPlaneLoader.GetPlane(0); // list_bg.bmp
     POINT bgPos = { 0, 0 }; //HACK: this seems to be hardcoded in exe and the txt spec is not used? (POINT bgPos = m_vDetailPlaneLoader.GetXY(0);)
     bgPlane->SetPos(bgPos);
     m_bgPlane = bgPlane;
+
+	// Load PAP line asset
+    CPlane papPlane = m_vDetailPlaneLoader.GetPlane(3); // pap_line.bmp
+	m_papLine = papPlane;
 
     // Create title (list_name_?.bmp based on language)
     CPlane titlePlane = m_vPlaneLoader.GetPlane(0);
@@ -304,8 +357,10 @@ void CSceneCardList::InitializeUI() {
 
 	CPlane sliderBox = m_cardTextBoxPLoader.GetPlane(1);
 	smart_ptr<ISurface> sliderSmartPtr(sliderBox.get(), false); // no ownership
+
 	CPlane separatorLine = m_vDetailPlaneLoader.GetPlane(3);
-	smart_ptr<ISurface> separatorLineSmartPtr(sliderBox.get(), false); // no ownership
+	smart_ptr<ISurface> separatorLineSmartPtr(separatorLine.get(), false); // no ownership
+
 	m_cardTextBox = smart_ptr<yaneuraoGameSDK3rd::Draw::CGUITextBox>(new yaneuraoGameSDK3rd::Draw::CGUITextBox(), false);
 	m_cardTextBoxFooter = smart_ptr<yaneuraoGameSDK3rd::Draw::CGUITextBox>(new yaneuraoGameSDK3rd::Draw::CGUITextBox(), false);
 
@@ -314,7 +369,7 @@ void CSceneCardList::InitializeUI() {
 	int sliderX, sliderY;
 	sliderBox->GetSize(sliderX, sliderY);
 
-	// INFO: our textbox widget works different so we dont really need those (but left here for authenticity reasons)
+	// INFO: textbox widget works different so we dont really need those (but left here as comment for authenticity reasons)
 	//std::string rawScrollData = m_cardTextBoxPLoader.GetXYRaw(0);
 	//int thicknessData = CStringScanner::ConvertToInt(rawScrollData.substr(0,2)); // Thickness (2 digits)
 	//int buttonData = CStringScanner::ConvertToInt(rawScrollData.substr(2,2)); // Button (2 digits)
@@ -328,43 +383,44 @@ void CSceneCardList::InitializeUI() {
 	m_cardTextBox->Create(topLeftBox.x, topLeftBox.y, boxScaleX, boxScaleY, yaneuraoGameSDK3rd::Draw::CGUITextBox::VERTICAL_SLIDER);
 
 	m_cardTextBox->SetMouse(smart_ptr<CFixMouse>(&m_mouse, false)); // Pass the current mouse state
-	//m_cardTextBox->SetTextColor(yaneuraoGameSDK3rd::Draw::ISurface::makeRGB(0, 0, 0, 0));
-	smart_ptr<yaneuraoGameSDK3rd::Draw::CFont> customFont(new yaneuraoGameSDK3rd::Draw::CFont());
-	customFont->SetFont("Arial");
-	customFont->SetSize(13);
-	customFont->SetWeight(FW_NORMAL);
-	customFont->SetItalic(false);
-	customFont->SetShadowOffset(0, 0);
-	customFont->SetLetterSpacing(-1);
-	//customFont->SetColor(ISurface::makeRGB(0, 0, 0, 0)); // Black text (assuming last 0 is alpha for opaque)
-	customFont->SetColor(ISurface::makeRGB(26, 47, 75, 0)); // Dark brown text (BGR)
-	customFont->SetHeight(18); // Adjust for desired line spacing, e.g., 15-17 for 12pt font
-	m_cardTextBox->SetFont(customFont);
-
+	m_cardTextBox->SetTextColor(yaneuraoGameSDK3rd::Draw::ISurface::makeRGB(0, 0, 0, 0));
 	m_cardTextBox->SetSliderGFX(sliderSmartPtr);
 	m_cardTextBox->SetArrowGFX(smart_ptr<CPlaneLoader>(&m_cardTextBoxPLoader, false), 5, 8);
 	m_cardTextBox->SetMargins(4,4);
 
-	// footer
-	// TODO: +200 PLACEHOLDER - use real value from txt
-	m_cardTextBoxFooter->Create(topLeftBox.x, topLeftBox.y+200, boxScaleX, boxScaleY, yaneuraoGameSDK3rd::Draw::CGUITextBox::VERTICAL_SLIDER);
-	m_cardTextBoxFooter->SetMouse(smart_ptr<CFixMouse>(&m_mouse, false));
-	smart_ptr<yaneuraoGameSDK3rd::Draw::CFont> customFontF(new yaneuraoGameSDK3rd::Draw::CFont());
-	customFontF->SetFont("Arial");
-	customFontF->SetSize(13);
-	customFontF->SetWeight(FW_NORMAL);
-	customFontF->SetItalic(false);
-	customFontF->SetShadowOffset(0, 0);
-	customFontF->SetLetterSpacing(-1);
+	// Footer init.
+	int arrowSizeX, arrowSizeY;
+	m_cardTextBox->GetArrowSize(arrowSizeX, arrowSizeY);
+	int insideYAxisFactor = (topLeftBox.y + boxScaleY) - arrowSizeY; // scroll box negative padding is the final footer size
+	m_cardTextBoxFooter->Create(topLeftBox.x, insideYAxisFactor, boxScaleX, boxScaleY, yaneuraoGameSDK3rd::Draw::CGUITextBox::VERTICAL_SLIDER);
+	m_cardTextBoxFooter->SetMargins(0,2);
+
+	// Default fonts init.
+	// TODO: default font passtrough is broken at the moment (HTML tags are used for everything)
+
+	//smart_ptr<yaneuraoGameSDK3rd::Draw::CFont> customFont(new yaneuraoGameSDK3rd::Draw::CFont());
+	//customFont->SetFont("Arial");
+	//customFont->SetSize(13);
+	//customFont->SetWeight(FW_NORMAL);
+	//customFont->SetItalic(false);
+	//customFont->SetShadowOffset(0, 0);
+	//customFont->SetLetterSpacing(-1);
+	//customFont->SetColor(ISurface::makeRGB(0, 0, 0, 0)); // Black text (assuming last 0 is alpha for opaque)
+	//customFont->SetColor(ISurface::makeRGB(26, 47, 75, 0)); // Dark brown text (BGR)
+	//customFont->SetHeight(18); // Adjust for desired line spacing, e.g., 15-17 for 12pt font
+	//m_cardTextBox->SetFont(customFont);
+
+	//smart_ptr<yaneuraoGameSDK3rd::Draw::CFont> customFontF(new yaneuraoGameSDK3rd::Draw::CFont());
+	//customFontF->SetFont("Arial");
+	//customFontF->SetSize(13);
+	//customFontF->SetWeight(FW_BOLD);
+	//customFontF->SetItalic(false);
+	//customFontF->SetShadowOffset(0, 0);
+	//customFontF->SetLetterSpacing(-1);
 	//customFontF->SetColor(ISurface::makeRGB(0, 0, 0, 0)); // Black text (assuming last 0 is alpha for opaque)
-	customFontF->SetColor(ISurface::makeRGB(26, 47, 75, 0)); // Dark brown text (BGR)
-	customFontF->SetHeight(18); // Adjust for desired line spacing, e.g., 15-17 for 12pt font
-	m_cardTextBoxFooter->SetFont(customFontF);
-	m_cardTextBoxFooter->SetMargins(4,4);
-	// DEBUG BACKGROUND TEXTBOX
-	//CPlane plnTEST = m_cardTextBoxPLoader.GetPlane(0);
-	//smart_ptr<ISurface> plnPtrBG(plnTEST.get(), false); // no ownership
-	//m_cardTextBox->SetBackgroundPlane(plnPtrBG);
+	//customFontF->SetColor(ISurface::makeRGB(26, 47, 75, 0)); // Dark brown text (BGR)
+	//customFontF->SetHeight(18); // Adjust for desired line spacing, e.g., 15-17 for 12pt font
+	//m_cardTextBoxFooter->SetFont(customFontF);
 }
 
 void CSceneCardList::InitializePageControls() {
@@ -768,8 +824,7 @@ void CSceneCardList::DrawCardGrid(const smart_ptr<ISurface>& lp) {
                             lp->BltNatural(m_cardHoverBorder.get(), x, y, &dstSize, &srcRect, NULL, 0);
 
 							// Card TextBox
-							//m_cardTextBox->SetTextTitle(card.cardData->name.name);
-							// TODO: this needs some work
+							// TODO: this needs some font tweaks and linespacing but matches more or less
 							const DialogEntry* cardTypeDialog = m_bin->GetDialog(card.cardData->properties.GetMonsterTypeTextId());
 							std::string formattedText = 
 								"<SIZE=-1><BOLD>" + std::string(card.cardData->name.name) + "</BOLD></SIZE>" +
@@ -779,26 +834,31 @@ void CSceneCardList::DrawCardGrid(const smart_ptr<ISurface>& lp) {
 								"<COLOR=#4A2C00><SIZE=0>" + std::string(card.cardData->description) + "</SIZE></COLOR>"
 								;
 
-							m_cardTextBox->SetText(formattedText);
 							MonsterType ctype = card.cardData->properties.GetMonsterType();
 							if (ctype == TYPE_SPELLCARD || ctype == TYPE_TRAPCARD)
 							{
-								//m_cardTextBox->SetTextFooter(""); // empty (hides the footer)
-								m_cardTextBoxFooter->SetText("TRAP SPELL CARD");
-							} 
+								m_cardTextBoxFooter->SetText(""); // its not drawn but reset just to be sure
+							}
 							else
 							{
-								m_cardTextBoxFooter->SetText("[MONSTER]");
-								//m_cardTextBox->SetTextTitleType("[MONSTER]");
-								//m_cardTextBox->SetTextFooter("ATK 1337 TEST");
+								formattedText += "<HR><HR>"; // padding for PAP separator line
+								WORD cardATK = card.cardData->properties.GetAttackValue();
+								WORD cardDEF = card.cardData->properties.GetDefenseValue(); 
+								char buffer[256];
+								// %3d inserts a number padded with spaces to a width of 3 (fixing your alignment/spacing issue automatically).
+								// TODO: this needs some font tweaks and linespacing but matches more or less
+								sprintf(buffer, "<SIZE=0><RIGHT><COLOR=#4A2C00>ATK/%3d DEF/%3d</COLOR></RIGHT></SIZE>", cardATK, cardDEF);
+								m_cardTextBoxFooter->SetText(buffer);
 							}
 
+							m_cardTextBox->SetText(formattedText); // apply text
                         }
 
                         // Draw "NEW" indicator only if card is new and fully scaled in
                         if (card.isNew && scalePercent == 100) {
                             CPlane newIndicator = m_vPlaneLoader.GetPlane(10);
                             if (newIndicator) {
+								// TODO: this is an animation. disappears onClick()
                                 lp->BltFast(newIndicator.get(), x + 5, y + 26);
                             }
                         }

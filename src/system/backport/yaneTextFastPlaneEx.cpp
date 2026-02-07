@@ -76,8 +76,11 @@ LRESULT CTextFastPlaneEx::UpdateRichText(bool bAntialias, bool bBlend) {
     m_vLines.clear();
     m_parser.SetText(m_strRichText);
     m_parser.SetBaseFontSize(m_parser.GetBaseFontSize());
-        
+    
     CRichTextLine currentLine;
+    // Set initial alignment for the very first line
+    currentLine.alignment = m_parser.GetContext().m_nAlign; 
+
     CRichTextSegment segment;
     int currentLineHeight = 0;
     int totalLayoutHeight = 0;
@@ -86,11 +89,14 @@ LRESULT CTextFastPlaneEx::UpdateRichText(bool bAntialias, bool bBlend) {
     while (m_parser.GetNextSegment(segment) == 0) {
         // Handle explicit line breaks.
         if (segment.text == "<BR>") {
-            currentLine.alignment = m_parser.GetContext().m_nAlign;
+            currentLine.alignment = m_parser.GetContext().m_nAlign; // Update before pushing
             currentLine.totalHeight = currentLineHeight;
             m_vLines.push_back(currentLine);
             totalLayoutHeight += currentLineHeight;
+            
+            // Reset for new line
             currentLine = CRichTextLine();
+            currentLine.alignment = m_parser.GetContext().m_nAlign;
             currentLineHeight = 0;
             continue;
         }
@@ -101,11 +107,13 @@ LRESULT CTextFastPlaneEx::UpdateRichText(bool bAntialias, bool bBlend) {
             currentLine.totalHeight = currentLineHeight;
             m_vLines.push_back(currentLine);
             totalLayoutHeight += currentLineHeight;
+            
             currentLine = CRichTextLine();
+            currentLine.alignment = m_parser.GetContext().m_nAlign; 
             currentLineHeight = 0;
 
             CRichTextLine hrLine;
-            hrLine.totalHeight = 5; // A simple height for the rule.
+            hrLine.totalHeight = 5; 
             m_vLines.push_back(hrLine);
             totalLayoutHeight += 5;
             continue;
@@ -114,28 +122,32 @@ LRESULT CTextFastPlaneEx::UpdateRichText(bool bAntialias, bool bBlend) {
         // Create a temporary CFont object to measure the segment's size.
         CFont tempFont;
         tempFont.SetSize(segment.context.m_nFontSize);
-		tempFont.SetFont(segment.context.m_nFontNo);
+        tempFont.SetFont(segment.context.m_nFontNo);
         tempFont.SetColor(segment.context.m_rgbColor);
         tempFont.SetWeight(segment.context.m_bBold ? 700 : 300);
         tempFont.SetItalic(segment.context.m_bItalic);
         tempFont.SetUnderLine(segment.context.m_bUnderLine);
         tempFont.SetStrikeOut(segment.context.m_bStrikeOut);
         tempFont.SetText(segment.text);
-        
+
         int segmentWidth, segmentHeight;
         tempFont.GetSize(segmentWidth, segmentHeight);
-		//Optional trailing space adjustment (i disabled this because its buggy atm, fix in future)
-		//if (segment.trailingSpace) {
-		//	segmentWidth += 1;
-		//}
+        
+        // If the line is practically empty, adopt the alignment of the 
+        // current segment. This allows tags like <RIGHT> at the start of 
+        // a line to take effect immediately.
+        if (currentLine.totalWidth == 0) {
+            currentLine.alignment = segment.context.m_nAlign;
+        }
 
         // Check if the segment fits on the current line. If not, start a new line.
         if (currentLine.totalWidth + segmentWidth > m_nWrapWidth && !currentLine.segments.empty()) {
             currentLine.totalHeight = currentLineHeight;
             m_vLines.push_back(currentLine);
             totalLayoutHeight += currentLineHeight;
+            
             currentLine = CRichTextLine();
-			currentLine.alignment = m_parser.GetContext().m_nAlign;
+            currentLine.alignment = m_parser.GetContext().m_nAlign; // Align for the NEW line
             currentLineHeight = 0;
         }
         
@@ -153,7 +165,9 @@ LRESULT CTextFastPlaneEx::UpdateRichText(bool bAntialias, bool bBlend) {
     
     // Push the final line if it's not empty.
     if (!currentLine.segments.empty()) {
-        currentLine.alignment = m_parser.GetContext().m_nAlign;
+        // Ensure final line gets latest alignment if it was still empty/processing
+        if (currentLine.totalWidth == 0) currentLine.alignment = m_parser.GetContext().m_nAlign;
+        
         currentLine.totalHeight = currentLineHeight;
         m_vLines.push_back(currentLine);
         totalLayoutHeight += currentLineHeight;
@@ -161,8 +175,8 @@ LRESULT CTextFastPlaneEx::UpdateRichText(bool bAntialias, bool bBlend) {
 
     // Now that we know the final size, we can resize the actual surface.
     SetSize(m_nWrapWidth, totalLayoutHeight);
-	bool createAlphaSurface = bAntialias || bBlend;
-	CreateSurface(m_nWrapWidth,totalLayoutHeight, createAlphaSurface);
+    bool createAlphaSurface = bAntialias || bBlend;
+    CreateSurface(m_nWrapWidth,totalLayoutHeight, createAlphaSurface);
 
     // Clear the surface with the background color from the parser context.
     SetFillColor(m_parser.GetContext().m_rgbColorBk);
@@ -300,16 +314,17 @@ LRESULT CRichTextParser::GetNextSegment(CRichTextSegment& segment) {
         } else {
 			LPCSTR lpAttr = tagContent.c_str();
 	        
-			// Use direct checks for alignment tags to ensure robustness
-			if (stricmp(lpAttr, "CENTER") == 0) {
+
+			if (IsToken(lpAttr, "CENTER")) {
+				m_contextStack.push(m_context);
 				m_context.m_nAlign = 1;
-			} else if (stricmp(lpAttr, "RIGHT") == 0) {
+			} else if (IsToken(lpAttr, "RIGHT")) {
+				m_contextStack.push(m_context);
 				m_context.m_nAlign = 2;
-			} else if (stricmp(lpAttr, "LEFT") == 0) {
+			} else if (IsToken(lpAttr, "LEFT")) {
+				m_contextStack.push(m_context);
 				m_context.m_nAlign = 0;
 			} 
-	        
-			// All other tags must push to the stack to be correctly nested
 			else if (IsToken(lpAttr, "FONT=")) { 
 				m_contextStack.push(m_context);
 				int nFontNo;

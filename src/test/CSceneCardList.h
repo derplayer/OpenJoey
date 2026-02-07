@@ -98,6 +98,7 @@ private:
     // UI Elements
     CPlane m_titlePlane;
     CPlane m_bgPlane;
+	CPlane m_papLine;
     CPlane m_cardHoverBorder;
     CFastPlane m_cardPreviewImage; // Still used for preview _area_ if not for the actual image.
     CGUIButton* m_backButton;

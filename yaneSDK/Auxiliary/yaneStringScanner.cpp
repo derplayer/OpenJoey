@@ -235,6 +235,12 @@ TxtResolutionData CStringScanner::GetStrResolution(LPCSTR& lp) {
     } else if (result.originalString.length() == 8) {
         result.resolution.x = ConvertToInt(result.originalString.substr(0, 4));
         result.resolution.y = ConvertToInt(result.originalString.substr(4, 4));
+    } else if (result.originalString.length() == 2) { // sometimes only the x axis is set (2 digit)
+        result.resolution.x = ConvertToInt(result.originalString.substr(0, 2));
+        result.resolution.y = 0;
+    } else if (result.originalString.length() == 3) { // sometimes only the x axis is set (3 digit)
+        result.resolution.x = ConvertToInt(result.originalString.substr(0, 3));
+        result.resolution.y = 0;
     }
 
     return result;

@@ -80,6 +80,8 @@ public:
 
     void SetMargins(int x, int y);
     void GetMargins(int& x, int& y) const;
+	void GetSize(int& x, int& y) const;
+	void GetArrowSize(int& x, int& y) const;
 
     void SetBackgroundPlane(smart_ptr<ISurface> pv);
 
@@ -126,6 +128,8 @@ protected:
     int m_nHeight; 
     int m_nSliderStripWidth;  
     int m_nSliderStripHeight; 
+	int m_nArrowWidth;  
+    int m_nArrowHeight; 
     int m_nContentWidth;  
     int m_nContentHeight; 
 

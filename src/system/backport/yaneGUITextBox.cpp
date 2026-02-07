@@ -150,6 +150,16 @@ void CGUITextBox::GetMargins(int& x, int& y) const {
     y = m_nMarginY;
 }
 
+void CGUITextBox::GetSize(int& x, int& y) const {
+    x = m_nWidth;
+    y = m_nHeight;
+}
+
+void CGUITextBox::GetArrowSize(int& x, int& y) const {
+    x = m_nArrowWidth;
+    y = m_nArrowHeight;
+}
+
 void CGUITextBox::SetSliderGFX(smart_ptr<ISurface> sliderThumbGraphic){
     m_vSliderThumbGraphic = sliderThumbGraphic;
     if (m_vSlider.get() && m_vSliderListener.get() && m_vSliderThumbGraphic.get()) {
@@ -206,14 +216,13 @@ void CGUITextBox::SetArrowGFX(smart_ptr<CPlaneLoader> pv, int upIndex, int downI
         upListener->SetPlaneLoader(pv, upIndex);
         downListener->SetPlaneLoader(pv, downIndex);
 
-        int buttonWidth = 0;
-        int buttonHeight = 0;
+        m_nArrowWidth = 0;
+        m_nArrowHeight = 0;
         CPlane upPlane = pv->GetPlane(upIndex);
-        if(upPlane.get()) upPlane->GetSize(buttonWidth, buttonHeight);
-        int arrowButtonHeight = buttonHeight;
+        if(upPlane.get()) upPlane->GetSize(m_nArrowWidth, m_nArrowHeight);
 
         m_vScrollUpButton->SetXY(m_nX + m_nWidth - m_nSliderStripWidth - m_nMarginX, m_nY + m_nMarginY);
-        m_vScrollDownButton->SetXY(m_nX + m_nWidth - m_nSliderStripWidth - m_nMarginX, m_nY + m_nHeight - arrowButtonHeight - m_nMarginY);
+        m_vScrollDownButton->SetXY(m_nX + m_nWidth - m_nSliderStripWidth - m_nMarginX, m_nY + m_nHeight - m_nArrowHeight - m_nMarginY);
     }
 }
 
